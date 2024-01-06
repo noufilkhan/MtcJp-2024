@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [Vehicles]    Script Date: 1/6/2024 9:56:54 PM ******/
+/****** Object:  Database [Vehicles]    Script Date: 1/6/2024 10:37:01 PM ******/
 CREATE DATABASE [Vehicles]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -80,7 +80,7 @@ ALTER DATABASE [Vehicles] SET QUERY_STORE = OFF
 GO
 USE [Vehicles]
 GO
-/****** Object:  Table [dbo].[Consignee]    Script Date: 1/6/2024 9:56:55 PM ******/
+/****** Object:  Table [dbo].[Consignee]    Script Date: 1/6/2024 10:37:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -103,7 +103,7 @@ CREATE TABLE [dbo].[Consignee](
 	[Import License Url] [nvarchar](500) NULL,
 	[Created By] [nvarchar](100) NOT NULL,
 	[Created Date] [datetime] NOT NULL,
-	[Last Modified Date] [datetime] NULL,
+	[Last Modified Date] [datetime] NOT NULL,
 	[Last Modified By] [nvarchar](100) NULL,
 	[Guid] [nvarchar](100) NOT NULL,
  CONSTRAINT [PK_Consignee] PRIMARY KEY CLUSTERED 
@@ -112,7 +112,7 @@ CREATE TABLE [dbo].[Consignee](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Customers]    Script Date: 1/6/2024 9:56:55 PM ******/
+/****** Object:  Table [dbo].[Customers]    Script Date: 1/6/2024 10:37:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -136,7 +136,7 @@ CREATE TABLE [dbo].[Customers](
 	[Import License Url] [nvarchar](500) NULL,
 	[Created By] [nvarchar](100) NOT NULL,
 	[Created Date] [datetime] NOT NULL,
-	[Last Modified Date] [datetime] NULL,
+	[Last Modified Date] [datetime] NOT NULL,
 	[Last Modified By] [nvarchar](100) NULL,
 	[Guid] [nvarchar](100) NOT NULL,
  CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED 
@@ -145,7 +145,7 @@ CREATE TABLE [dbo].[Customers](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Entity]    Script Date: 1/6/2024 9:56:55 PM ******/
+/****** Object:  Table [dbo].[Entity]    Script Date: 1/6/2024 10:37:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -156,7 +156,7 @@ CREATE TABLE [dbo].[Entity](
 	[Is Head Office] [bit] NOT NULL,
 	[Created By] [nvarchar](100) NOT NULL,
 	[Created Date] [datetime] NOT NULL,
-	[Last Modified Date] [datetime] NULL,
+	[Last Modified Date] [datetime] NOT NULL,
 	[Last Modified By] [nvarchar](100) NULL,
 	[Guid] [nvarchar](100) NOT NULL,
  CONSTRAINT [PK_Entity] PRIMARY KEY CLUSTERED 
@@ -165,7 +165,55 @@ CREATE TABLE [dbo].[Entity](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Security Group]    Script Date: 1/6/2024 9:56:55 PM ******/
+/****** Object:  Table [dbo].[Prompt Values]    Script Date: 1/6/2024 10:37:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Prompt Values](
+	[Prompt Id] [int] NOT NULL,
+	[Prompt Name] [nvarchar](500) NOT NULL,
+	[Prompt Sub Category] [nvarchar](500) NOT NULL,
+	[Prompt Description] [nvarchar](500) NOT NULL,
+	[Prompt Value] [nvarchar](500) NOT NULL,
+	[Created By] [nvarchar](100) NOT NULL,
+	[Created Date] [datetime] NOT NULL,
+	[Last Modified Date] [datetime] NOT NULL,
+	[Last Modified By] [nvarchar](100) NULL,
+	[Guid] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Prompt Values] PRIMARY KEY CLUSTERED 
+(
+	[Prompt Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Sales]    Script Date: 1/6/2024 10:37:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Sales](
+	[Sales Id] [int] NOT NULL,
+	[Stock Id] [int] NOT NULL,
+	[Consignee Id] [int] NOT NULL,
+	[User Id] [int] NOT NULL,
+	[Purchasing Price] [numeric](18, 3) NOT NULL,
+	[Purchasing Price Currency] [nvarchar](10) NOT NULL,
+	[Selling Price] [numeric](18, 3) NOT NULL,
+	[Selling Price Currency] [nvarchar](10) NOT NULL,
+	[Exchange Rate] [numeric](18, 10) NOT NULL,
+	[Created By] [nvarchar](100) NOT NULL,
+	[Created Date] [datetime] NOT NULL,
+	[Last Modified Date] [datetime] NOT NULL,
+	[Last Modified By] [nvarchar](100) NULL,
+	[Guid] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Sales] PRIMARY KEY CLUSTERED 
+(
+	[Sales Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Security Group]    Script Date: 1/6/2024 10:37:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -175,7 +223,7 @@ CREATE TABLE [dbo].[Security Group](
 	[Description] [nvarchar](100) NOT NULL,
 	[Created By] [nvarchar](100) NOT NULL,
 	[Created Date] [datetime] NOT NULL,
-	[Last Modified Date] [datetime] NULL,
+	[Last Modified Date] [datetime] NOT NULL,
 	[Last Modified By] [nvarchar](100) NULL,
 	[Guid] [nvarchar](100) NOT NULL,
  CONSTRAINT [PK_Security Group] PRIMARY KEY CLUSTERED 
@@ -184,7 +232,92 @@ CREATE TABLE [dbo].[Security Group](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[User Info]    Script Date: 1/6/2024 9:56:55 PM ******/
+/****** Object:  Table [dbo].[Stock]    Script Date: 1/6/2024 10:37:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Stock](
+	[Stock Id] [int] IDENTITY(1,1) NOT NULL,
+	[Entity] [int] NOT NULL,
+	[Make] [nvarchar](300) NOT NULL,
+	[Model] [nvarchar](300) NOT NULL,
+	[Created By] [nvarchar](100) NOT NULL,
+	[Created Date] [datetime] NOT NULL,
+	[Last Modified Date] [datetime] NOT NULL,
+	[Last Modified By] [nvarchar](100) NULL,
+	[Guid] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Stock] PRIMARY KEY CLUSTERED 
+(
+	[Stock Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Stock Addtional Cost]    Script Date: 1/6/2024 10:37:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Stock Addtional Cost](
+	[Stock Cost Id] [int] IDENTITY(1,1) NOT NULL,
+	[Stock Id] [int] NOT NULL,
+	[Cost Type] [nvarchar](300) NOT NULL,
+	[Amount Curency] [nvarchar](10) NOT NULL,
+	[Amount] [numeric](18, 3) NOT NULL,
+	[Created By] [nvarchar](100) NOT NULL,
+	[Created Date] [datetime] NOT NULL,
+	[Last Modified Date] [datetime] NOT NULL,
+	[Last Modified By] [nvarchar](100) NULL,
+	[Guid] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Stock Addtional Cost] PRIMARY KEY CLUSTERED 
+(
+	[Stock Cost Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Stock Documents]    Script Date: 1/6/2024 10:37:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Stock Documents](
+	[Stock Document Id] [int] IDENTITY(1,1) NOT NULL,
+	[Stock Id] [int] NOT NULL,
+	[Document Type] [nvarchar](500) NOT NULL,
+	[Document Url] [nvarchar](500) NOT NULL,
+	[Created By] [nvarchar](100) NOT NULL,
+	[Created Date] [datetime] NOT NULL,
+	[Last Modified Date] [datetime] NOT NULL,
+	[Last Modified By] [nvarchar](100) NULL,
+	[Guid] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Stock Documents] PRIMARY KEY CLUSTERED 
+(
+	[Stock Document Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Stock Images]    Script Date: 1/6/2024 10:37:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Stock Images](
+	[Stock Image Id] [int] IDENTITY(1,1) NOT NULL,
+	[Stock Id] [int] NOT NULL,
+	[Photo Url] [nvarchar](500) NOT NULL,
+	[Is Cover] [bit] NOT NULL,
+	[Created By] [nvarchar](100) NOT NULL,
+	[Created Date] [datetime] NOT NULL,
+	[Last Modified Date] [datetime] NOT NULL,
+	[Last Modified By] [nvarchar](100) NULL,
+	[Guid] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Stock Images] PRIMARY KEY CLUSTERED 
+(
+	[Stock Image Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[User Info]    Script Date: 1/6/2024 10:37:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -202,9 +335,10 @@ CREATE TABLE [dbo].[User Info](
 	[Contact Info] [nvarchar](100) NOT NULL,
 	[City] [nvarchar](100) NOT NULL,
 	[Country] [nvarchar](100) NOT NULL,
+	[Language] [nvarchar](100) NOT NULL,
 	[Created By] [nvarchar](100) NOT NULL,
 	[Created Date] [datetime] NOT NULL,
-	[Last Modified Date] [datetime] NULL,
+	[Last Modified Date] [datetime] NOT NULL,
 	[Last Modified By] [nvarchar](100) NULL,
 	[Guid] [nvarchar](100) NOT NULL,
  CONSTRAINT [PK_User Info] PRIMARY KEY CLUSTERED 
@@ -213,7 +347,7 @@ CREATE TABLE [dbo].[User Info](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[User Security Group]    Script Date: 1/6/2024 9:56:55 PM ******/
+/****** Object:  Table [dbo].[User Security Group]    Script Date: 1/6/2024 10:37:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -224,7 +358,7 @@ CREATE TABLE [dbo].[User Security Group](
 	[Security Id] [int] NOT NULL,
 	[Created By] [nvarchar](100) NOT NULL,
 	[Created Date] [datetime] NOT NULL,
-	[Last Modified Date] [datetime] NULL,
+	[Last Modified Date] [datetime] NOT NULL,
 	[Last Modified By] [nvarchar](100) NULL,
 	[Guid] [nvarchar](100) NOT NULL,
  CONSTRAINT [PK_User Security Group] PRIMARY KEY CLUSTERED 
@@ -257,6 +391,22 @@ ALTER TABLE [dbo].[Entity] ADD  CONSTRAINT [DF_Entity_Last Modified Date]  DEFAU
 GO
 ALTER TABLE [dbo].[Entity] ADD  CONSTRAINT [DF_Entity_Guid]  DEFAULT (newid()) FOR [Guid]
 GO
+ALTER TABLE [dbo].[Prompt Values] ADD  CONSTRAINT [DF_Prompt Values_Created By]  DEFAULT (N'Audit') FOR [Created By]
+GO
+ALTER TABLE [dbo].[Prompt Values] ADD  CONSTRAINT [DF_Prompt Values_Created Date]  DEFAULT (getdate()) FOR [Created Date]
+GO
+ALTER TABLE [dbo].[Prompt Values] ADD  CONSTRAINT [DF_Prompt Values_Last Modified Date]  DEFAULT (getdate()) FOR [Last Modified Date]
+GO
+ALTER TABLE [dbo].[Prompt Values] ADD  CONSTRAINT [DF_Prompt Values_Guid]  DEFAULT (newid()) FOR [Guid]
+GO
+ALTER TABLE [dbo].[Sales] ADD  CONSTRAINT [DF_Sales_Created By]  DEFAULT (N'Audit') FOR [Created By]
+GO
+ALTER TABLE [dbo].[Sales] ADD  CONSTRAINT [DF_Sales_Created Date]  DEFAULT (getdate()) FOR [Created Date]
+GO
+ALTER TABLE [dbo].[Sales] ADD  CONSTRAINT [DF_Sales_Last Modified Date]  DEFAULT (getdate()) FOR [Last Modified Date]
+GO
+ALTER TABLE [dbo].[Sales] ADD  CONSTRAINT [DF_Sales_Guid]  DEFAULT (newid()) FOR [Guid]
+GO
 ALTER TABLE [dbo].[Security Group] ADD  CONSTRAINT [DF_Security Group_Created By]  DEFAULT (N'Audit') FOR [Created By]
 GO
 ALTER TABLE [dbo].[Security Group] ADD  CONSTRAINT [DF_Security Group_Created Date]  DEFAULT (getdate()) FOR [Created Date]
@@ -264,6 +414,40 @@ GO
 ALTER TABLE [dbo].[Security Group] ADD  CONSTRAINT [DF_Security Group_Last Modified Date]  DEFAULT (getdate()) FOR [Last Modified Date]
 GO
 ALTER TABLE [dbo].[Security Group] ADD  CONSTRAINT [DF_Security Group_Guid]  DEFAULT (newid()) FOR [Guid]
+GO
+ALTER TABLE [dbo].[Stock] ADD  CONSTRAINT [DF_Stock_Created By]  DEFAULT (N'Audit') FOR [Created By]
+GO
+ALTER TABLE [dbo].[Stock] ADD  CONSTRAINT [DF_Stock_Created Date]  DEFAULT (getdate()) FOR [Created Date]
+GO
+ALTER TABLE [dbo].[Stock] ADD  CONSTRAINT [DF_Stock_Last Modified Date]  DEFAULT (getdate()) FOR [Last Modified Date]
+GO
+ALTER TABLE [dbo].[Stock] ADD  CONSTRAINT [DF_Stock_Guid]  DEFAULT (newid()) FOR [Guid]
+GO
+ALTER TABLE [dbo].[Stock Addtional Cost] ADD  CONSTRAINT [DF_Stock Addtional Cost_Created By]  DEFAULT (N'Audit') FOR [Created By]
+GO
+ALTER TABLE [dbo].[Stock Addtional Cost] ADD  CONSTRAINT [DF_Stock Addtional Cost_Created Date]  DEFAULT (getdate()) FOR [Created Date]
+GO
+ALTER TABLE [dbo].[Stock Addtional Cost] ADD  CONSTRAINT [DF_Stock Addtional Cost_Last Modified Date]  DEFAULT (getdate()) FOR [Last Modified Date]
+GO
+ALTER TABLE [dbo].[Stock Addtional Cost] ADD  CONSTRAINT [DF_Stock Addtional Cost_Guid]  DEFAULT (newid()) FOR [Guid]
+GO
+ALTER TABLE [dbo].[Stock Documents] ADD  CONSTRAINT [DF_Stock Documents_Created By]  DEFAULT (N'Audit') FOR [Created By]
+GO
+ALTER TABLE [dbo].[Stock Documents] ADD  CONSTRAINT [DF_Stock Documents_Created Date]  DEFAULT (getdate()) FOR [Created Date]
+GO
+ALTER TABLE [dbo].[Stock Documents] ADD  CONSTRAINT [DF_Stock Documents_Last Modified Date]  DEFAULT (getdate()) FOR [Last Modified Date]
+GO
+ALTER TABLE [dbo].[Stock Documents] ADD  CONSTRAINT [DF_Stock Documents_Guid]  DEFAULT (newid()) FOR [Guid]
+GO
+ALTER TABLE [dbo].[Stock Images] ADD  CONSTRAINT [DF_Stock Images_Is Cover]  DEFAULT ((0)) FOR [Is Cover]
+GO
+ALTER TABLE [dbo].[Stock Images] ADD  CONSTRAINT [DF_Stock Images_Created By]  DEFAULT (N'Audit') FOR [Created By]
+GO
+ALTER TABLE [dbo].[Stock Images] ADD  CONSTRAINT [DF_Stock Images_Created Date]  DEFAULT (getdate()) FOR [Created Date]
+GO
+ALTER TABLE [dbo].[Stock Images] ADD  CONSTRAINT [DF_Stock Images_Last Modified Date]  DEFAULT (getdate()) FOR [Last Modified Date]
+GO
+ALTER TABLE [dbo].[Stock Images] ADD  CONSTRAINT [DF_Stock Images_Guid]  DEFAULT (newid()) FOR [Guid]
 GO
 ALTER TABLE [dbo].[User Info] ADD  CONSTRAINT [DF_User Info_Created By]  DEFAULT (N'Audit') FOR [Created By]
 GO
@@ -295,6 +479,41 @@ ALTER TABLE [dbo].[Customers]  WITH CHECK ADD  CONSTRAINT [FK_Customers_User Inf
 REFERENCES [dbo].[User Info] ([User Id])
 GO
 ALTER TABLE [dbo].[Customers] CHECK CONSTRAINT [FK_Customers_User Info]
+GO
+ALTER TABLE [dbo].[Sales]  WITH CHECK ADD  CONSTRAINT [FK_Sales_Consignee] FOREIGN KEY([Consignee Id])
+REFERENCES [dbo].[Consignee] ([Consignee Id])
+GO
+ALTER TABLE [dbo].[Sales] CHECK CONSTRAINT [FK_Sales_Consignee]
+GO
+ALTER TABLE [dbo].[Sales]  WITH CHECK ADD  CONSTRAINT [FK_Sales_Stock] FOREIGN KEY([Stock Id])
+REFERENCES [dbo].[Stock] ([Stock Id])
+GO
+ALTER TABLE [dbo].[Sales] CHECK CONSTRAINT [FK_Sales_Stock]
+GO
+ALTER TABLE [dbo].[Sales]  WITH CHECK ADD  CONSTRAINT [FK_Sales_User Info] FOREIGN KEY([User Id])
+REFERENCES [dbo].[User Info] ([User Id])
+GO
+ALTER TABLE [dbo].[Sales] CHECK CONSTRAINT [FK_Sales_User Info]
+GO
+ALTER TABLE [dbo].[Stock]  WITH CHECK ADD  CONSTRAINT [FK_Stock_Entity] FOREIGN KEY([Entity])
+REFERENCES [dbo].[Entity] ([Entity])
+GO
+ALTER TABLE [dbo].[Stock] CHECK CONSTRAINT [FK_Stock_Entity]
+GO
+ALTER TABLE [dbo].[Stock Addtional Cost]  WITH CHECK ADD  CONSTRAINT [FK_Stock Addtional Cost_Stock] FOREIGN KEY([Stock Id])
+REFERENCES [dbo].[Stock] ([Stock Id])
+GO
+ALTER TABLE [dbo].[Stock Addtional Cost] CHECK CONSTRAINT [FK_Stock Addtional Cost_Stock]
+GO
+ALTER TABLE [dbo].[Stock Documents]  WITH CHECK ADD  CONSTRAINT [FK_Stock Documents_Stock] FOREIGN KEY([Stock Id])
+REFERENCES [dbo].[Stock] ([Stock Id])
+GO
+ALTER TABLE [dbo].[Stock Documents] CHECK CONSTRAINT [FK_Stock Documents_Stock]
+GO
+ALTER TABLE [dbo].[Stock Images]  WITH CHECK ADD  CONSTRAINT [FK_Stock Images_Stock] FOREIGN KEY([Stock Id])
+REFERENCES [dbo].[Stock] ([Stock Id])
+GO
+ALTER TABLE [dbo].[Stock Images] CHECK CONSTRAINT [FK_Stock Images_Stock]
 GO
 ALTER TABLE [dbo].[User Info]  WITH CHECK ADD  CONSTRAINT [FK_User Info_Entity] FOREIGN KEY([Entity])
 REFERENCES [dbo].[Entity] ([Entity])
