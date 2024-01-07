@@ -11,9 +11,9 @@ public partial class UserInfo
 
     public string Username { get; set; } = null!;
 
-    public string PasswordHalt { get; set; } = null!;
+    public byte[] PasswordHalt { get; set; } = null!;
 
-    public string? PasswordSalt { get; set; }
+    public byte[]? PasswordSalt { get; set; }
 
     public string FirstName { get; set; } = null!;
 

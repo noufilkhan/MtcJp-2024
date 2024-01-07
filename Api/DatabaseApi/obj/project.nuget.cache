@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DzbXbODTMSpqj0FJ41q2DdHoxWmipRmZOiD3uEx3U1ugHlVMLoEw+JVqbjTmqYbCysdXq0/M4vg4YrCFeR1N6w==",
+  "dgSpecHash": "MVs2b3PAbsuVAcE+VyhKRMrNzJGrje/dNJsnpMYKRKFJRYYd0JhDAcq0NfudSrfODiAa+5w21MJJqY1FzeBakw==",
   "success": true,
-  "projectFilePath": "E:\\Development\\angular\\MtcJp-2024\\Api\\DatabaseApi\\DatabaseApi.csproj",
+  "projectFilePath": "D:\\Development\\Projects\\MtcJp-2024\\Api\\DatabaseApi\\DatabaseApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Noufil\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Noufil\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
