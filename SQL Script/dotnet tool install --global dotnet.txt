@@ -17,5 +17,7 @@ Working Connection
 dotnet ef dbcontext scaffold "Data Source=NOUFIL-PC\SQLEXPRESS;Initial Catalog=Vehicles;Integrated Security=True;Encrypt=False;Trust Server Certificate=True" Microsoft.EntityFrameworkCore.SqlServer -o Models
 
 Update Database
-dotnet ef dbcontext scaffold "Data Source=DESKTOP-0UJ8JH8\\SQLEXPRESS;Initial Catalog=Vehicles;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models -Force
+dotnet ef dbcontext scaffold "Data Source=DESKTOP-0UJ8JH8\SQLEXPRESS;Initial Catalog=Vehicles;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models -f
+
 dotnet ef dbcontext scaffold "Data Source=NOUFIL-PC\SQLEXPRESS;Initial Catalog=Vehicles;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models -f
+

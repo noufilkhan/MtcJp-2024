@@ -26,7 +26,7 @@ public class UserController : BaseApiController
     [HttpGet("{username}")]
     public async Task<ActionResult<UserInfo>> GetById(string username){
         return await _context.UserInfos
-            .Include(p=> p.UserSecurityGroups)
+            .Include(p=> p.UserSecurityGroups)            
             .FirstOrDefaultAsync(x=> x.Username == username);
     }
 }

@@ -161,3 +161,7 @@ E:\Development\angular\MtcJp-2024\Api\DatabaseApi\bin\Debug\net7.0\Microsoft.Asp
 E:\Development\angular\MtcJp-2024\Api\DatabaseApi\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 E:\Development\angular\MtcJp-2024\Api\DatabaseApi\bin\Debug\net7.0\Newtonsoft.Json.dll
 E:\Development\angular\MtcJp-2024\Api\DatabaseApi\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+D:\Development\Projects\MtcJp-2024\Api\DatabaseApi\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Development\Projects\MtcJp-2024\Api\DatabaseApi\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Development\Projects\MtcJp-2024\Api\DatabaseApi\bin\Debug\net7.0\Newtonsoft.Json.dll
+D:\Development\Projects\MtcJp-2024\Api\DatabaseApi\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll

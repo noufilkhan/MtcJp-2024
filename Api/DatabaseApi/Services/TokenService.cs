@@ -21,18 +21,19 @@ public class TokenService : ITokenService
     {
         var claims = new List<Claim>{
             new Claim (
-                JwtRegisteredClaimNames.NameId, 
+                JwtRegisteredClaimNames.NameId,
                 user.Username
-                ),
+                )
         };
 
         var creds = new SigningCredentials(
-            _key,SecurityAlgorithms.HmacSha512Signature
+            _key, SecurityAlgorithms.HmacSha512Signature
             );
 
-        var tokenDescriptor = new SecurityTokenDescriptor{
-            Subject=new ClaimsIdentity(claims),
-            Expires=DateTime.Now.AddDays(7),
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(claims),
+            Expires = DateTime.Now.AddDays(7),
             SigningCredentials = creds
         };
 

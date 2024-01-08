@@ -39,9 +39,11 @@ public partial class VehiclesContext : DbContext
 
     public virtual DbSet<UserSecurityGroup> UserSecurityGroups { get; set; }
 
-//     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//         => optionsBuilder.UseSqlServer("Data Source=NOUFIL-PC\\SQLEXPRESS;Initial Catalog=Vehicles;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;");
+    public virtual DbSet<UserSession> UserSessions { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-0UJ8JH8\\SQLEXPRESS;Initial Catalog=Vehicles;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -530,7 +532,9 @@ public partial class VehiclesContext : DbContext
             entity.ToTable("User Info");
 
             entity.Property(e => e.UserId).HasColumnName("User Id");
-            entity.Property(e => e.City).HasMaxLength(100);
+            entity.Property(e => e.City)
+                .IsRequired()
+                .HasMaxLength(100);
             entity.Property(e => e.ContactInfo)
                 .IsRequired()
                 .HasMaxLength(100)
@@ -581,7 +585,6 @@ public partial class VehiclesContext : DbContext
                 .HasMaxLength(250)
                 .HasColumnName("Password Halt");
             entity.Property(e => e.PasswordSalt)
-                .IsRequired()
                 .HasMaxLength(250)
                 .HasColumnName("Password Salt");
             entity.Property(e => e.Username)
@@ -633,6 +636,24 @@ public partial class VehiclesContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_User Security Group_User Info");
+        });
+
+        modelBuilder.Entity<UserSession>(entity =>
+        {
+            entity.HasKey(e => e.SessionId);
+
+            entity.ToTable("User Session");
+
+            entity.Property(e => e.SessionId).HasColumnName("Session Id");
+            entity.Property(e => e.Expiry).HasColumnType("datetime");
+            entity.Property(e => e.Session)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasDefaultValueSql("(newid())");
+            entity.Property(e => e.UserGuid)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnName("User Guid");
         });
 
         OnModelCreatingPartial(modelBuilder);
