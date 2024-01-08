@@ -7,19 +7,19 @@ public partial class Entity
 {
     public int Entity1 { get; set; }
 
-    public string EntityName { get; set; } = null!;
+    public string EntityName { get; set; }
 
     public bool IsHeadOffice { get; set; }
 
-    public string CreatedBy { get; set; } = null!;
+    public string CreatedBy { get; set; }
 
     public DateTime CreatedDate { get; set; }
 
     public DateTime LastModifiedDate { get; set; }
 
-    public string? LastModifiedBy { get; set; }
+    public string LastModifiedBy { get; set; }
 
-    public string Guid { get; set; } = null!;
+    public string Guid { get; set; }
 
     public virtual ICollection<Consignee> Consignees { get; set; } = new List<Consignee>();
 

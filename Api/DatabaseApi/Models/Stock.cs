@@ -9,21 +9,21 @@ public partial class Stock
 
     public int Entity { get; set; }
 
-    public string Make { get; set; } = null!;
+    public string Make { get; set; }
 
-    public string Model { get; set; } = null!;
+    public string Model { get; set; }
 
-    public string CreatedBy { get; set; } = null!;
+    public string CreatedBy { get; set; }
 
     public DateTime CreatedDate { get; set; }
 
     public DateTime LastModifiedDate { get; set; }
 
-    public string? LastModifiedBy { get; set; }
+    public string LastModifiedBy { get; set; }
 
-    public string Guid { get; set; } = null!;
+    public string Guid { get; set; }
 
-    public virtual Entity EntityNavigation { get; set; } = null!;
+    public virtual Entity EntityNavigation { get; set; }
 
     public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
 

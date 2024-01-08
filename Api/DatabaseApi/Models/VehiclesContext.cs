@@ -41,7 +41,7 @@ public partial class VehiclesContext : DbContext
 
 //     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//         => optionsBuilder.UseSqlServer("Data Source=DESKTOP-0UJ8JH8\\SQLEXPRESS;Initial Catalog=Vehicles;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;");
+//         => optionsBuilder.UseSqlServer("Data Source=NOUFIL-PC\\SQLEXPRESS;Initial Catalog=Vehicles;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -57,18 +57,25 @@ public partial class VehiclesContext : DbContext
             entity.Property(e => e.BuyingLimitCurrency)
                 .HasMaxLength(10)
                 .HasColumnName("Buying Limit Currency");
-            entity.Property(e => e.Category).HasMaxLength(250);
+            entity.Property(e => e.Category)
+                .IsRequired()
+                .HasMaxLength(250);
             entity.Property(e => e.CompanyName)
+                .IsRequired()
                 .HasMaxLength(250)
                 .HasColumnName("Company Name");
             entity.Property(e => e.CompanyOwner)
+                .IsRequired()
                 .HasMaxLength(250)
                 .HasColumnName("Company Owner");
             entity.Property(e => e.CompanyRegistrationUrl)
                 .HasMaxLength(500)
                 .HasColumnName("Company Registration Url");
-            entity.Property(e => e.Country).HasMaxLength(250);
+            entity.Property(e => e.Country)
+                .IsRequired()
+                .HasMaxLength(250);
             entity.Property(e => e.CreatedBy)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(N'Audit')")
                 .HasColumnName("Created By");
@@ -77,9 +84,11 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Created Date");
             entity.Property(e => e.CustomerName)
+                .IsRequired()
                 .HasMaxLength(250)
                 .HasColumnName("Customer Name");
             entity.Property(e => e.Guid)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(newid())");
             entity.Property(e => e.ImportLicenseUrl)
@@ -114,18 +123,25 @@ public partial class VehiclesContext : DbContext
             entity.Property(e => e.BuyingLimitCurrency)
                 .HasMaxLength(10)
                 .HasColumnName("Buying Limit Currency");
-            entity.Property(e => e.Category).HasMaxLength(250);
+            entity.Property(e => e.Category)
+                .IsRequired()
+                .HasMaxLength(250);
             entity.Property(e => e.CompanyName)
+                .IsRequired()
                 .HasMaxLength(250)
                 .HasColumnName("Company Name");
             entity.Property(e => e.CompanyOwner)
+                .IsRequired()
                 .HasMaxLength(250)
                 .HasColumnName("Company Owner");
             entity.Property(e => e.CompanyRegistrationUrl)
                 .HasMaxLength(500)
                 .HasColumnName("Company Registration Url");
-            entity.Property(e => e.Country).HasMaxLength(250);
+            entity.Property(e => e.Country)
+                .IsRequired()
+                .HasMaxLength(250);
             entity.Property(e => e.CreatedBy)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(N'Audit')")
                 .HasColumnName("Created By");
@@ -134,9 +150,11 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Created Date");
             entity.Property(e => e.CustomerName)
+                .IsRequired()
                 .HasMaxLength(250)
                 .HasColumnName("Customer Name");
             entity.Property(e => e.Guid)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(newid())");
             entity.Property(e => e.ImportLicenseUrl)
@@ -175,6 +193,7 @@ public partial class VehiclesContext : DbContext
 
             entity.Property(e => e.Entity1).HasColumnName("Entity");
             entity.Property(e => e.CreatedBy)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(N'Audit')")
                 .HasColumnName("Created By");
@@ -183,9 +202,11 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Created Date");
             entity.Property(e => e.EntityName)
+                .IsRequired()
                 .HasMaxLength(300)
                 .HasColumnName("Entity Name");
             entity.Property(e => e.Guid)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(newid())");
             entity.Property(e => e.IsHeadOffice).HasColumnName("Is Head Office");
@@ -208,6 +229,7 @@ public partial class VehiclesContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("Prompt Id");
             entity.Property(e => e.CreatedBy)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(N'Audit')")
                 .HasColumnName("Created By");
@@ -216,6 +238,7 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Created Date");
             entity.Property(e => e.Guid)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(newid())");
             entity.Property(e => e.LastModifiedBy)
@@ -226,15 +249,19 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Last Modified Date");
             entity.Property(e => e.PromptDescription)
+                .IsRequired()
                 .HasMaxLength(500)
                 .HasColumnName("Prompt Description");
             entity.Property(e => e.PromptName)
+                .IsRequired()
                 .HasMaxLength(500)
                 .HasColumnName("Prompt Name");
             entity.Property(e => e.PromptSubCategory)
+                .IsRequired()
                 .HasMaxLength(500)
                 .HasColumnName("Prompt Sub Category");
             entity.Property(e => e.PromptValue1)
+                .IsRequired()
                 .HasMaxLength(500)
                 .HasColumnName("Prompt Value");
         });
@@ -248,6 +275,7 @@ public partial class VehiclesContext : DbContext
                 .HasColumnName("Sales Id");
             entity.Property(e => e.ConsigneeId).HasColumnName("Consignee Id");
             entity.Property(e => e.CreatedBy)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(N'Audit')")
                 .HasColumnName("Created By");
@@ -259,6 +287,7 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("numeric(18, 10)")
                 .HasColumnName("Exchange Rate");
             entity.Property(e => e.Guid)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(newid())");
             entity.Property(e => e.LastModifiedBy)
@@ -272,12 +301,14 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("numeric(18, 3)")
                 .HasColumnName("Purchasing Price");
             entity.Property(e => e.PurchasingPriceCurrency)
+                .IsRequired()
                 .HasMaxLength(10)
                 .HasColumnName("Purchasing Price Currency");
             entity.Property(e => e.SellingPrice)
                 .HasColumnType("numeric(18, 3)")
                 .HasColumnName("Selling Price");
             entity.Property(e => e.SellingPriceCurrency)
+                .IsRequired()
                 .HasMaxLength(10)
                 .HasColumnName("Selling Price Currency");
             entity.Property(e => e.StockId).HasColumnName("Stock Id");
@@ -307,6 +338,7 @@ public partial class VehiclesContext : DbContext
 
             entity.Property(e => e.SecurityId).HasColumnName("Security Id");
             entity.Property(e => e.CreatedBy)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(N'Audit')")
                 .HasColumnName("Created By");
@@ -314,8 +346,11 @@ public partial class VehiclesContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("Created Date");
-            entity.Property(e => e.Description).HasMaxLength(100);
+            entity.Property(e => e.Description)
+                .IsRequired()
+                .HasMaxLength(100);
             entity.Property(e => e.Guid)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(newid())");
             entity.Property(e => e.LastModifiedBy)
@@ -333,6 +368,7 @@ public partial class VehiclesContext : DbContext
 
             entity.Property(e => e.StockId).HasColumnName("Stock Id");
             entity.Property(e => e.CreatedBy)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(N'Audit')")
                 .HasColumnName("Created By");
@@ -341,6 +377,7 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Created Date");
             entity.Property(e => e.Guid)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(newid())");
             entity.Property(e => e.LastModifiedBy)
@@ -350,8 +387,12 @@ public partial class VehiclesContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("Last Modified Date");
-            entity.Property(e => e.Make).HasMaxLength(300);
-            entity.Property(e => e.Model).HasMaxLength(300);
+            entity.Property(e => e.Make)
+                .IsRequired()
+                .HasMaxLength(300);
+            entity.Property(e => e.Model)
+                .IsRequired()
+                .HasMaxLength(300);
 
             entity.HasOne(d => d.EntityNavigation).WithMany(p => p.Stocks)
                 .HasForeignKey(d => d.Entity)
@@ -368,12 +409,15 @@ public partial class VehiclesContext : DbContext
             entity.Property(e => e.StockCostId).HasColumnName("Stock Cost Id");
             entity.Property(e => e.Amount).HasColumnType("numeric(18, 3)");
             entity.Property(e => e.AmountCurency)
+                .IsRequired()
                 .HasMaxLength(10)
                 .HasColumnName("Amount Curency");
             entity.Property(e => e.CostType)
+                .IsRequired()
                 .HasMaxLength(300)
                 .HasColumnName("Cost Type");
             entity.Property(e => e.CreatedBy)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(N'Audit')")
                 .HasColumnName("Created By");
@@ -382,6 +426,7 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Created Date");
             entity.Property(e => e.Guid)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(newid())");
             entity.Property(e => e.LastModifiedBy)
@@ -405,6 +450,7 @@ public partial class VehiclesContext : DbContext
 
             entity.Property(e => e.StockDocumentId).HasColumnName("Stock Document Id");
             entity.Property(e => e.CreatedBy)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(N'Audit')")
                 .HasColumnName("Created By");
@@ -413,12 +459,15 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Created Date");
             entity.Property(e => e.DocumentType)
+                .IsRequired()
                 .HasMaxLength(500)
                 .HasColumnName("Document Type");
             entity.Property(e => e.DocumentUrl)
+                .IsRequired()
                 .HasMaxLength(500)
                 .HasColumnName("Document Url");
             entity.Property(e => e.Guid)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(newid())");
             entity.Property(e => e.LastModifiedBy)
@@ -442,6 +491,7 @@ public partial class VehiclesContext : DbContext
 
             entity.Property(e => e.StockImageId).HasColumnName("Stock Image Id");
             entity.Property(e => e.CreatedBy)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(N'Audit')")
                 .HasColumnName("Created By");
@@ -450,6 +500,7 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Created Date");
             entity.Property(e => e.Guid)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(newid())");
             entity.Property(e => e.IsCover).HasColumnName("Is Cover");
@@ -461,6 +512,7 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Last Modified Date");
             entity.Property(e => e.PhotoUrl)
+                .IsRequired()
                 .HasMaxLength(500)
                 .HasColumnName("Photo Url");
             entity.Property(e => e.StockId).HasColumnName("Stock Id");
@@ -480,10 +532,14 @@ public partial class VehiclesContext : DbContext
             entity.Property(e => e.UserId).HasColumnName("User Id");
             entity.Property(e => e.City).HasMaxLength(100);
             entity.Property(e => e.ContactInfo)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasColumnName("Contact Info");
-            entity.Property(e => e.Country).HasMaxLength(100);
+            entity.Property(e => e.Country)
+                .IsRequired()
+                .HasMaxLength(100);
             entity.Property(e => e.CreatedBy)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(N'Audit')")
                 .HasColumnName("Created By");
@@ -492,15 +548,20 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Created Date");
             entity.Property(e => e.EmailAddress)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasColumnName("Email Address");
             entity.Property(e => e.FirstName)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasColumnName("First Name");
             entity.Property(e => e.Guid)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(newid())");
-            entity.Property(e => e.Language).HasMaxLength(100);
+            entity.Property(e => e.Language)
+                .IsRequired()
+                .HasMaxLength(100);
             entity.Property(e => e.LastModifiedBy)
                 .HasMaxLength(100)
                 .HasColumnName("Last Modified By");
@@ -509,18 +570,23 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Last Modified Date");
             entity.Property(e => e.LastName)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasColumnName("Last Name");
             entity.Property(e => e.MiddleName)
                 .HasMaxLength(100)
                 .HasColumnName("Middle Name");
             entity.Property(e => e.PasswordHalt)
+                .IsRequired()
                 .HasMaxLength(250)
                 .HasColumnName("Password Halt");
             entity.Property(e => e.PasswordSalt)
+                .IsRequired()
                 .HasMaxLength(250)
                 .HasColumnName("Password Salt");
-            entity.Property(e => e.Username).HasMaxLength(100);
+            entity.Property(e => e.Username)
+                .IsRequired()
+                .HasMaxLength(100);
 
             entity.HasOne(d => d.EntityNavigation).WithMany(p => p.UserInfos)
                 .HasForeignKey(d => d.Entity)
@@ -536,6 +602,7 @@ public partial class VehiclesContext : DbContext
 
             entity.Property(e => e.UserSecurityId).HasColumnName("User Security Id");
             entity.Property(e => e.CreatedBy)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(N'Audit')")
                 .HasColumnName("Created By");
@@ -544,6 +611,7 @@ public partial class VehiclesContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("Created Date");
             entity.Property(e => e.Guid)
+                .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(newid())");
             entity.Property(e => e.LastModifiedBy)

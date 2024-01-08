@@ -9,19 +9,19 @@ public partial class StockImage
 
     public int StockId { get; set; }
 
-    public string PhotoUrl { get; set; } = null!;
+    public string PhotoUrl { get; set; }
 
     public bool IsCover { get; set; }
 
-    public string CreatedBy { get; set; } = null!;
+    public string CreatedBy { get; set; }
 
     public DateTime CreatedDate { get; set; }
 
     public DateTime LastModifiedDate { get; set; }
 
-    public string? LastModifiedBy { get; set; }
+    public string LastModifiedBy { get; set; }
 
-    public string Guid { get; set; } = null!;
+    public string Guid { get; set; }
 
-    public virtual Stock Stock { get; set; } = null!;
+    public virtual Stock Stock { get; set; }
 }

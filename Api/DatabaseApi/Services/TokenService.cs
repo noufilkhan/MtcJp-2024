@@ -1,8 +1,8 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using DatabaseApi.Entities;
 using DatabaseApi.Interfaces;
+using DatabaseApi.Models;
 using Microsoft.IdentityModel.Tokens;
 
 namespace DatabaseApi.Services;
@@ -17,7 +17,7 @@ public class TokenService : ITokenService
             );
     }
 
-    public string CreateToken(AppUser user)
+    public string CreateToken(UserInfo user)
     {
         var claims = new List<Claim>{
             new Claim (

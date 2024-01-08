@@ -9,41 +9,41 @@ public partial class UserInfo
 
     public int Entity { get; set; }
 
-    public string Username { get; set; } = null!;
+    public string Username { get; set; }
 
-    public byte[] PasswordHalt { get; set; } = null!;
+    public byte[] PasswordHalt { get; set; }
 
-    public byte[]? PasswordSalt { get; set; }
+    public byte[] PasswordSalt { get; set; }
 
-    public string FirstName { get; set; } = null!;
+    public string FirstName { get; set; }
 
-    public string? MiddleName { get; set; }
+    public string MiddleName { get; set; }
 
-    public string LastName { get; set; } = null!;
+    public string LastName { get; set; }
 
-    public string EmailAddress { get; set; } = null!;
+    public string EmailAddress { get; set; }
 
-    public string ContactInfo { get; set; } = null!;
+    public string ContactInfo { get; set; }
 
-    public string City { get; set; } = null!;
+    public string City { get; set; }
 
-    public string Country { get; set; } = null!;
+    public string Country { get; set; }
 
-    public string Language { get; set; } = null!;
+    public string Language { get; set; }
 
-    public string CreatedBy { get; set; } = null!;
+    public string CreatedBy { get; set; }
 
     public DateTime CreatedDate { get; set; }
 
     public DateTime LastModifiedDate { get; set; }
 
-    public string? LastModifiedBy { get; set; }
+    public string LastModifiedBy { get; set; }
 
-    public string Guid { get; set; } = null!;
+    public string Guid { get; set; }
 
     public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
 
-    public virtual Entity EntityNavigation { get; set; } = null!;
+    public virtual Entity EntityNavigation { get; set; }
 
     public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
 

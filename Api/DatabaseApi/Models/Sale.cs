@@ -15,27 +15,27 @@ public partial class Sale
 
     public decimal PurchasingPrice { get; set; }
 
-    public string PurchasingPriceCurrency { get; set; } = null!;
+    public string PurchasingPriceCurrency { get; set; }
 
     public decimal SellingPrice { get; set; }
 
-    public string SellingPriceCurrency { get; set; } = null!;
+    public string SellingPriceCurrency { get; set; }
 
     public decimal ExchangeRate { get; set; }
 
-    public string CreatedBy { get; set; } = null!;
+    public string CreatedBy { get; set; }
 
     public DateTime CreatedDate { get; set; }
 
     public DateTime LastModifiedDate { get; set; }
 
-    public string? LastModifiedBy { get; set; }
+    public string LastModifiedBy { get; set; }
 
-    public string Guid { get; set; } = null!;
+    public string Guid { get; set; }
 
-    public virtual Consignee Consignee { get; set; } = null!;
+    public virtual Consignee Consignee { get; set; }
 
-    public virtual Stock Stock { get; set; } = null!;
+    public virtual Stock Stock { get; set; }
 
-    public virtual UserInfo User { get; set; } = null!;
+    public virtual UserInfo User { get; set; }
 }

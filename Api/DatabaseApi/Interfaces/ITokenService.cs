@@ -1,8 +1,8 @@
-﻿using DatabaseApi.Entities;
+﻿using DatabaseApi.Models;
 
 namespace DatabaseApi.Interfaces;
 
 public interface ITokenService
 {
-    string CreateToken (AppUser user);
+    string CreateToken (UserInfo user);
 }

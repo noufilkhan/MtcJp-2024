@@ -11,43 +11,43 @@ public partial class Customer
 
     public int UserId { get; set; }
 
-    public string CompanyName { get; set; } = null!;
+    public string CompanyName { get; set; }
 
-    public string CompanyOwner { get; set; } = null!;
+    public string CompanyOwner { get; set; }
 
-    public string CustomerName { get; set; } = null!;
+    public string CustomerName { get; set; }
 
-    public string Country { get; set; } = null!;
+    public string Country { get; set; }
 
-    public string? Source { get; set; }
+    public string Source { get; set; }
 
-    public string Category { get; set; } = null!;
+    public string Category { get; set; }
 
-    public string? Address { get; set; }
+    public string Address { get; set; }
 
-    public string? Phone { get; set; }
+    public string Phone { get; set; }
 
-    public string? BuyingLimitCurrency { get; set; }
+    public string BuyingLimitCurrency { get; set; }
 
     public decimal? BuyingLimit { get; set; }
 
-    public string? TaxId { get; set; }
+    public string TaxId { get; set; }
 
-    public string? CompanyRegistrationUrl { get; set; }
+    public string CompanyRegistrationUrl { get; set; }
 
-    public string? ImportLicenseUrl { get; set; }
+    public string ImportLicenseUrl { get; set; }
 
-    public string CreatedBy { get; set; } = null!;
+    public string CreatedBy { get; set; }
 
     public DateTime CreatedDate { get; set; }
 
     public DateTime LastModifiedDate { get; set; }
 
-    public string? LastModifiedBy { get; set; }
+    public string LastModifiedBy { get; set; }
 
-    public string Guid { get; set; } = null!;
+    public string Guid { get; set; }
 
-    public virtual Entity EntityNavigation { get; set; } = null!;
+    public virtual Entity EntityNavigation { get; set; }
 
-    public virtual UserInfo User { get; set; } = null!;
+    public virtual UserInfo User { get; set; }
 }
