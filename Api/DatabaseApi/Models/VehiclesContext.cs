@@ -41,9 +41,11 @@ public partial class VehiclesContext : DbContext
 
     public virtual DbSet<UserSession> UserSessions { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-0UJ8JH8\\SQLEXPRESS;Initial Catalog=Vehicles;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;");
+    public virtual DbSet<ViewCustomer> ViewCustomers { get; set; }
+
+//     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//         => optionsBuilder.UseSqlServer("Data Source=NOUFIL-PC\\SQLEXPRESS;Initial Catalog=Vehicles;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -654,6 +656,72 @@ public partial class VehiclesContext : DbContext
                 .IsRequired()
                 .HasMaxLength(100)
                 .HasColumnName("User Guid");
+        });
+
+        modelBuilder.Entity<ViewCustomer>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("View_Customers");
+
+            entity.Property(e => e.Address).HasMaxLength(250);
+            entity.Property(e => e.BuyingLimit)
+                .HasColumnType("numeric(18, 3)")
+                .HasColumnName("Buying Limit");
+            entity.Property(e => e.BuyingLimitCurrency)
+                .HasMaxLength(10)
+                .HasColumnName("Buying Limit Currency");
+            entity.Property(e => e.Category)
+                .IsRequired()
+                .HasMaxLength(250);
+            entity.Property(e => e.CompanyName)
+                .IsRequired()
+                .HasMaxLength(250)
+                .HasColumnName("Company Name");
+            entity.Property(e => e.CompanyOwner)
+                .IsRequired()
+                .HasMaxLength(250)
+                .HasColumnName("Company Owner");
+            entity.Property(e => e.Country)
+                .IsRequired()
+                .HasMaxLength(250);
+            entity.Property(e => e.CreatedBy)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasColumnName("Created By");
+            entity.Property(e => e.CreatedDate)
+                .HasColumnType("datetime")
+                .HasColumnName("Created Date");
+            entity.Property(e => e.CustomerId).HasColumnName("Customer Id");
+            entity.Property(e => e.CustomerName)
+                .IsRequired()
+                .HasMaxLength(250)
+                .HasColumnName("Customer Name");
+            entity.Property(e => e.EntityName)
+                .IsRequired()
+                .HasMaxLength(300)
+                .HasColumnName("Entity Name");
+            entity.Property(e => e.Guid)
+                .IsRequired()
+                .HasMaxLength(100);
+            entity.Property(e => e.ImportLicenseUrl)
+                .HasMaxLength(500)
+                .HasColumnName("Import License Url");
+            entity.Property(e => e.IsHeadOffice).HasColumnName("Is Head Office");
+            entity.Property(e => e.LastModifiedBy)
+                .HasMaxLength(100)
+                .HasColumnName("Last Modified By");
+            entity.Property(e => e.LastModifiedDate)
+                .HasColumnType("datetime")
+                .HasColumnName("Last Modified Date");
+            entity.Property(e => e.Phone).HasMaxLength(250);
+            entity.Property(e => e.Source).HasMaxLength(250);
+            entity.Property(e => e.TaxId)
+                .HasMaxLength(250)
+                .HasColumnName("Tax Id");
+            entity.Property(e => e.Username)
+                .IsRequired()
+                .HasMaxLength(100);
         });
 
         OnModelCreatingPartial(modelBuilder);

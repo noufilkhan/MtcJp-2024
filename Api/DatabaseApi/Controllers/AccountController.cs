@@ -26,6 +26,7 @@ public class AccountController : BaseApiController
 
     //http://localhost:5000/api/account/register
     [HttpPost("register")] //Post : api/account/register
+    [Authorize]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerdto)
     {
 
@@ -61,8 +62,7 @@ public class AccountController : BaseApiController
     }
 
     // http://localhost:5000/api/account/login
-    [HttpPost("login")]
-    [Authorize]
+    [HttpPost("login")]    
     public async Task<ActionResult<UserDto>> Login(LoginDto logindto)
     {
 
