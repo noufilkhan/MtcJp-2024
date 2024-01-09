@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace DatabaseApi;
 
-namespace DatabaseApi.Models;
-
-public partial class ViewCustomer
+public class CustomerDto
 {
-    public string EntityName { get; set; }
-
-    public bool IsHeadOffice { get; set; }
-
-    public string Username { get; set; }
+    public int Entity { get; set; }
+    
+    public int UserId { get; set; }
 
     public string CompanyName { get; set; }
 
@@ -33,21 +28,10 @@ public partial class ViewCustomer
 
     public string TaxId { get; set; }
 
-    public string ImportLicenseUrl { get; set; }
-
-    public string CreatedBy { get; set; }
-
-    public DateTime CreatedDate { get; set; }
-
-    public string LastModifiedBy { get; set; }
-
-    public DateTime LastModifiedDate { get; set; }
+    public string ImportLicenseUrl { get; set; }    
 
     public string Guid { get; set; }
 
     public int CustomerId { get; set; }
 
-    public int Entity { get; set; }
-
-    public int UserId { get; set; }
 }

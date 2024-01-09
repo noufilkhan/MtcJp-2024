@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [Vehicles]    Script Date: 1/8/2024 10:09:00 PM ******/
+/****** Object:  Database [Vehicles]    Script Date: 1/9/2024 4:52:03 PM ******/
 CREATE DATABASE [Vehicles]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -9,6 +9,7 @@ CREATE DATABASE [Vehicles]
 ( NAME = N'Vehicles_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\Vehicles_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
  WITH CATALOG_COLLATION = DATABASE_DEFAULT
 GO
+
 ALTER DATABASE [Vehicles] SET COMPATIBILITY_LEVEL = 150
 GO
 IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
@@ -80,39 +81,7 @@ ALTER DATABASE [Vehicles] SET QUERY_STORE = OFF
 GO
 USE [Vehicles]
 GO
-/****** Object:  Table [dbo].[Consignee]    Script Date: 1/8/2024 10:09:00 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Consignee](
-	[Consignee Id] [int] IDENTITY(1,1) NOT NULL,
-	[Entity] [int] NOT NULL,
-	[Company Name] [nvarchar](250) NOT NULL,
-	[Company Owner] [nvarchar](250) NOT NULL,
-	[Customer Name] [nvarchar](250) NOT NULL,
-	[Country] [nvarchar](250) NOT NULL,
-	[Source] [nvarchar](250) NULL,
-	[Category] [nvarchar](250) NOT NULL,
-	[Address] [nvarchar](250) NULL,
-	[Phone] [nvarchar](250) NULL,
-	[Buying Limit Currency] [nvarchar](10) NULL,
-	[Buying Limit] [numeric](18, 3) NULL,
-	[Tax Id] [nvarchar](250) NULL,
-	[Company Registration Url] [nvarchar](500) NULL,
-	[Import License Url] [nvarchar](500) NULL,
-	[Created By] [nvarchar](100) NOT NULL,
-	[Created Date] [datetime] NOT NULL,
-	[Last Modified Date] [datetime] NOT NULL,
-	[Last Modified By] [nvarchar](100) NULL,
-	[Guid] [nvarchar](100) NOT NULL,
- CONSTRAINT [PK_Consignee] PRIMARY KEY CLUSTERED 
-(
-	[Consignee Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Customers]    Script Date: 1/8/2024 10:09:00 PM ******/
+/****** Object:  Table [dbo].[Customers]    Script Date: 1/9/2024 4:52:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -145,7 +114,7 @@ CREATE TABLE [dbo].[Customers](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Entity]    Script Date: 1/8/2024 10:09:00 PM ******/
+/****** Object:  Table [dbo].[Entity]    Script Date: 1/9/2024 4:52:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -165,159 +134,7 @@ CREATE TABLE [dbo].[Entity](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Prompt Values]    Script Date: 1/8/2024 10:09:00 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Prompt Values](
-	[Prompt Id] [int] NOT NULL,
-	[Prompt Name] [nvarchar](500) NOT NULL,
-	[Prompt Sub Category] [nvarchar](500) NOT NULL,
-	[Prompt Description] [nvarchar](500) NOT NULL,
-	[Prompt Value] [nvarchar](500) NOT NULL,
-	[Created By] [nvarchar](100) NOT NULL,
-	[Created Date] [datetime] NOT NULL,
-	[Last Modified Date] [datetime] NOT NULL,
-	[Last Modified By] [nvarchar](100) NULL,
-	[Guid] [nvarchar](100) NOT NULL,
- CONSTRAINT [PK_Prompt Values] PRIMARY KEY CLUSTERED 
-(
-	[Prompt Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Sales]    Script Date: 1/8/2024 10:09:00 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Sales](
-	[Sales Id] [int] NOT NULL,
-	[Stock Id] [int] NOT NULL,
-	[Consignee Id] [int] NOT NULL,
-	[User Id] [int] NOT NULL,
-	[Purchasing Price] [numeric](18, 3) NOT NULL,
-	[Purchasing Price Currency] [nvarchar](10) NOT NULL,
-	[Selling Price] [numeric](18, 3) NOT NULL,
-	[Selling Price Currency] [nvarchar](10) NOT NULL,
-	[Exchange Rate] [numeric](18, 10) NOT NULL,
-	[Created By] [nvarchar](100) NOT NULL,
-	[Created Date] [datetime] NOT NULL,
-	[Last Modified Date] [datetime] NOT NULL,
-	[Last Modified By] [nvarchar](100) NULL,
-	[Guid] [nvarchar](100) NOT NULL,
- CONSTRAINT [PK_Sales] PRIMARY KEY CLUSTERED 
-(
-	[Sales Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Security Group]    Script Date: 1/8/2024 10:09:00 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Security Group](
-	[Security Id] [int] IDENTITY(1,1) NOT NULL,
-	[Description] [nvarchar](100) NOT NULL,
-	[Created By] [nvarchar](100) NOT NULL,
-	[Created Date] [datetime] NOT NULL,
-	[Last Modified Date] [datetime] NOT NULL,
-	[Last Modified By] [nvarchar](100) NULL,
-	[Guid] [nvarchar](100) NOT NULL,
- CONSTRAINT [PK_Security Group] PRIMARY KEY CLUSTERED 
-(
-	[Security Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Stock]    Script Date: 1/8/2024 10:09:00 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Stock](
-	[Stock Id] [int] IDENTITY(1,1) NOT NULL,
-	[Entity] [int] NOT NULL,
-	[Make] [nvarchar](300) NOT NULL,
-	[Model] [nvarchar](300) NOT NULL,
-	[Created By] [nvarchar](100) NOT NULL,
-	[Created Date] [datetime] NOT NULL,
-	[Last Modified Date] [datetime] NOT NULL,
-	[Last Modified By] [nvarchar](100) NULL,
-	[Guid] [nvarchar](100) NOT NULL,
- CONSTRAINT [PK_Stock] PRIMARY KEY CLUSTERED 
-(
-	[Stock Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Stock Addtional Cost]    Script Date: 1/8/2024 10:09:00 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Stock Addtional Cost](
-	[Stock Cost Id] [int] IDENTITY(1,1) NOT NULL,
-	[Stock Id] [int] NOT NULL,
-	[Cost Type] [nvarchar](300) NOT NULL,
-	[Amount Curency] [nvarchar](10) NOT NULL,
-	[Amount] [numeric](18, 3) NOT NULL,
-	[Created By] [nvarchar](100) NOT NULL,
-	[Created Date] [datetime] NOT NULL,
-	[Last Modified Date] [datetime] NOT NULL,
-	[Last Modified By] [nvarchar](100) NULL,
-	[Guid] [nvarchar](100) NOT NULL,
- CONSTRAINT [PK_Stock Addtional Cost] PRIMARY KEY CLUSTERED 
-(
-	[Stock Cost Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Stock Documents]    Script Date: 1/8/2024 10:09:00 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Stock Documents](
-	[Stock Document Id] [int] IDENTITY(1,1) NOT NULL,
-	[Stock Id] [int] NOT NULL,
-	[Document Type] [nvarchar](500) NOT NULL,
-	[Document Url] [nvarchar](500) NOT NULL,
-	[Created By] [nvarchar](100) NOT NULL,
-	[Created Date] [datetime] NOT NULL,
-	[Last Modified Date] [datetime] NOT NULL,
-	[Last Modified By] [nvarchar](100) NULL,
-	[Guid] [nvarchar](100) NOT NULL,
- CONSTRAINT [PK_Stock Documents] PRIMARY KEY CLUSTERED 
-(
-	[Stock Document Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[Stock Images]    Script Date: 1/8/2024 10:09:00 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Stock Images](
-	[Stock Image Id] [int] IDENTITY(1,1) NOT NULL,
-	[Stock Id] [int] NOT NULL,
-	[Photo Url] [nvarchar](500) NOT NULL,
-	[Is Cover] [bit] NOT NULL,
-	[Created By] [nvarchar](100) NOT NULL,
-	[Created Date] [datetime] NOT NULL,
-	[Last Modified Date] [datetime] NOT NULL,
-	[Last Modified By] [nvarchar](100) NULL,
-	[Guid] [nvarchar](100) NOT NULL,
- CONSTRAINT [PK_Stock Images] PRIMARY KEY CLUSTERED 
-(
-	[Stock Image Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[User Info]    Script Date: 1/8/2024 10:09:00 PM ******/
+/****** Object:  Table [dbo].[User Info]    Script Date: 1/9/2024 4:52:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -347,7 +164,206 @@ CREATE TABLE [dbo].[User Info](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[User Security Group]    Script Date: 1/8/2024 10:09:00 PM ******/
+/****** Object:  View [dbo].[View_Customers]    Script Date: 1/9/2024 4:52:03 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[View_Customers]
+AS
+SELECT        dbo.Entity.[Entity Name], dbo.Entity.[Is Head Office], dbo.[User Info].Username, dbo.Customers.[Company Name], dbo.Customers.[Company Owner], dbo.Customers.[Customer Name], dbo.Customers.Country, 
+                         dbo.Customers.Source, dbo.Customers.Category, dbo.Customers.Address, dbo.Customers.Phone, dbo.Customers.[Buying Limit Currency], dbo.Customers.[Buying Limit], dbo.Customers.[Tax Id], 
+                         dbo.Customers.[Import License Url], dbo.Customers.[Created By], dbo.Customers.[Created Date], dbo.Customers.[Last Modified By], dbo.Customers.[Last Modified Date], dbo.Customers.Guid, dbo.Customers.[Customer Id], 
+                         dbo.Customers.Entity
+FROM            dbo.Customers INNER JOIN
+                         dbo.Entity ON dbo.Customers.Entity = dbo.Entity.Entity INNER JOIN
+                         dbo.[User Info] ON dbo.Customers.[User Id] = dbo.[User Info].[User Id] AND dbo.Entity.Entity = dbo.[User Info].Entity
+GO
+/****** Object:  Table [dbo].[Consignee]    Script Date: 1/9/2024 4:52:03 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Consignee](
+	[Consignee Id] [int] IDENTITY(1,1) NOT NULL,
+	[Entity] [int] NOT NULL,
+	[Company Name] [nvarchar](250) NOT NULL,
+	[Company Owner] [nvarchar](250) NOT NULL,
+	[Customer Name] [nvarchar](250) NOT NULL,
+	[Country] [nvarchar](250) NOT NULL,
+	[Source] [nvarchar](250) NULL,
+	[Category] [nvarchar](250) NOT NULL,
+	[Address] [nvarchar](250) NULL,
+	[Phone] [nvarchar](250) NULL,
+	[Buying Limit Currency] [nvarchar](10) NULL,
+	[Buying Limit] [numeric](18, 3) NULL,
+	[Tax Id] [nvarchar](250) NULL,
+	[Company Registration Url] [nvarchar](500) NULL,
+	[Import License Url] [nvarchar](500) NULL,
+	[Created By] [nvarchar](100) NOT NULL,
+	[Created Date] [datetime] NOT NULL,
+	[Last Modified Date] [datetime] NOT NULL,
+	[Last Modified By] [nvarchar](100) NULL,
+	[Guid] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Consignee] PRIMARY KEY CLUSTERED 
+(
+	[Consignee Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Prompt Values]    Script Date: 1/9/2024 4:52:03 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Prompt Values](
+	[Prompt Id] [int] NOT NULL,
+	[Prompt Name] [nvarchar](500) NOT NULL,
+	[Prompt Sub Category] [nvarchar](500) NOT NULL,
+	[Prompt Description] [nvarchar](500) NOT NULL,
+	[Prompt Value] [nvarchar](500) NOT NULL,
+	[Created By] [nvarchar](100) NOT NULL,
+	[Created Date] [datetime] NOT NULL,
+	[Last Modified Date] [datetime] NOT NULL,
+	[Last Modified By] [nvarchar](100) NULL,
+	[Guid] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Prompt Values] PRIMARY KEY CLUSTERED 
+(
+	[Prompt Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Sales]    Script Date: 1/9/2024 4:52:03 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Sales](
+	[Sales Id] [int] NOT NULL,
+	[Stock Id] [int] NOT NULL,
+	[Consignee Id] [int] NOT NULL,
+	[User Id] [int] NOT NULL,
+	[Purchasing Price] [numeric](18, 3) NOT NULL,
+	[Purchasing Price Currency] [nvarchar](10) NOT NULL,
+	[Selling Price] [numeric](18, 3) NOT NULL,
+	[Selling Price Currency] [nvarchar](10) NOT NULL,
+	[Exchange Rate] [numeric](18, 10) NOT NULL,
+	[Created By] [nvarchar](100) NOT NULL,
+	[Created Date] [datetime] NOT NULL,
+	[Last Modified Date] [datetime] NOT NULL,
+	[Last Modified By] [nvarchar](100) NULL,
+	[Guid] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Sales] PRIMARY KEY CLUSTERED 
+(
+	[Sales Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Security Group]    Script Date: 1/9/2024 4:52:03 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Security Group](
+	[Security Id] [int] IDENTITY(1,1) NOT NULL,
+	[Description] [nvarchar](100) NOT NULL,
+	[Created By] [nvarchar](100) NOT NULL,
+	[Created Date] [datetime] NOT NULL,
+	[Last Modified Date] [datetime] NOT NULL,
+	[Last Modified By] [nvarchar](100) NULL,
+	[Guid] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Security Group] PRIMARY KEY CLUSTERED 
+(
+	[Security Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Stock]    Script Date: 1/9/2024 4:52:03 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Stock](
+	[Stock Id] [int] IDENTITY(1,1) NOT NULL,
+	[Entity] [int] NOT NULL,
+	[Make] [nvarchar](300) NOT NULL,
+	[Model] [nvarchar](300) NOT NULL,
+	[Created By] [nvarchar](100) NOT NULL,
+	[Created Date] [datetime] NOT NULL,
+	[Last Modified Date] [datetime] NOT NULL,
+	[Last Modified By] [nvarchar](100) NULL,
+	[Guid] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Stock] PRIMARY KEY CLUSTERED 
+(
+	[Stock Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Stock Addtional Cost]    Script Date: 1/9/2024 4:52:03 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Stock Addtional Cost](
+	[Stock Cost Id] [int] IDENTITY(1,1) NOT NULL,
+	[Stock Id] [int] NOT NULL,
+	[Cost Type] [nvarchar](300) NOT NULL,
+	[Amount Curency] [nvarchar](10) NOT NULL,
+	[Amount] [numeric](18, 3) NOT NULL,
+	[Created By] [nvarchar](100) NOT NULL,
+	[Created Date] [datetime] NOT NULL,
+	[Last Modified Date] [datetime] NOT NULL,
+	[Last Modified By] [nvarchar](100) NULL,
+	[Guid] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Stock Addtional Cost] PRIMARY KEY CLUSTERED 
+(
+	[Stock Cost Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Stock Documents]    Script Date: 1/9/2024 4:52:03 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Stock Documents](
+	[Stock Document Id] [int] IDENTITY(1,1) NOT NULL,
+	[Stock Id] [int] NOT NULL,
+	[Document Type] [nvarchar](500) NOT NULL,
+	[Document Url] [nvarchar](500) NOT NULL,
+	[Created By] [nvarchar](100) NOT NULL,
+	[Created Date] [datetime] NOT NULL,
+	[Last Modified Date] [datetime] NOT NULL,
+	[Last Modified By] [nvarchar](100) NULL,
+	[Guid] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Stock Documents] PRIMARY KEY CLUSTERED 
+(
+	[Stock Document Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Stock Images]    Script Date: 1/9/2024 4:52:03 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Stock Images](
+	[Stock Image Id] [int] IDENTITY(1,1) NOT NULL,
+	[Stock Id] [int] NOT NULL,
+	[Photo Url] [nvarchar](500) NOT NULL,
+	[Is Cover] [bit] NOT NULL,
+	[Created By] [nvarchar](100) NOT NULL,
+	[Created Date] [datetime] NOT NULL,
+	[Last Modified Date] [datetime] NOT NULL,
+	[Last Modified By] [nvarchar](100) NULL,
+	[Guid] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_Stock Images] PRIMARY KEY CLUSTERED 
+(
+	[Stock Image Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[User Security Group]    Script Date: 1/9/2024 4:52:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -367,7 +383,7 @@ CREATE TABLE [dbo].[User Security Group](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[User Session]    Script Date: 1/8/2024 10:09:00 PM ******/
+/****** Object:  Table [dbo].[User Session]    Script Date: 1/9/2024 4:52:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -382,50 +398,6 @@ CREATE TABLE [dbo].[User Session](
 	[Session Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-SET IDENTITY_INSERT [dbo].[Entity] ON 
-GO
-INSERT [dbo].[Entity] ([Entity], [Entity Name], [Is Head Office], [Created By], [Created Date], [Last Modified Date], [Last Modified By], [Guid]) VALUES (1, N'Head Office', 1, N'Audit', CAST(N'2024-01-08T20:42:53.037' AS DateTime), CAST(N'2024-01-08T20:42:53.037' AS DateTime), NULL, N'C4BA11D4-92E2-4277-9E7A-2BC30259C7A6')
-GO
-INSERT [dbo].[Entity] ([Entity], [Entity Name], [Is Head Office], [Created By], [Created Date], [Last Modified Date], [Last Modified By], [Guid]) VALUES (2, N'Karachi Office', 0, N'Audit', CAST(N'2024-01-08T20:43:15.527' AS DateTime), CAST(N'2024-01-08T20:43:15.527' AS DateTime), NULL, N'16B943A4-1028-475C-8D7F-F9E977644E5D')
-GO
-SET IDENTITY_INSERT [dbo].[Entity] OFF
-GO
-SET IDENTITY_INSERT [dbo].[Security Group] ON 
-GO
-INSERT [dbo].[Security Group] ([Security Id], [Description], [Created By], [Created Date], [Last Modified Date], [Last Modified By], [Guid]) VALUES (1, N'Admin', N'Audit', CAST(N'2024-01-08T21:09:59.687' AS DateTime), CAST(N'2024-01-08T21:09:59.687' AS DateTime), NULL, N'8729484F-7477-40F6-A8E2-030E23443D45')
-GO
-INSERT [dbo].[Security Group] ([Security Id], [Description], [Created By], [Created Date], [Last Modified Date], [Last Modified By], [Guid]) VALUES (2, N'Agent', N'Audit', CAST(N'2024-01-08T21:10:04.067' AS DateTime), CAST(N'2024-01-08T21:10:04.067' AS DateTime), NULL, N'6056022C-C6E9-40EF-87FD-E0345E1E0765')
-GO
-SET IDENTITY_INSERT [dbo].[Security Group] OFF
-GO
-SET IDENTITY_INSERT [dbo].[User Info] ON 
-GO
-INSERT [dbo].[User Info] ([User Id], [Entity], [Username], [Password Halt], [Password Salt], [First Name], [Middle Name], [Last Name], [Email Address], [Contact Info], [City], [Country], [Language], [Created By], [Created Date], [Last Modified Date], [Last Modified By], [Guid]) VALUES (1, 1, N'noufil', 0xEAF86B65F2A69EFC871AF5283BA907972865504B96F17A4AFE77797F2EB695D77500E5309E6BC657E818F0E948CABF7AAE868BBF8E0654B044A1AB3A4953D5B9, 0x016C756538CF81398F4E7EF90BA41372ED1EA803BA9C67A04F6CDD2EF70B16B98DCADE37F89E463BAA463C094062D933E12FFFB969763281820F3A1CA785231553B92010B5AA37F959972091F9D74DD7F4678C8347E7E538B6D8853C3A6CCCC4C9CBA0A98BCCD9CD66DC3D922DDC7DB759A8D77B4757F83C96283F5DC598276A, N'Noufil', N'', N'Khan', N'noufil@aanass.net', N'+97334330829', N'Karachi', N'Pakistan', N'English', N'Audit', CAST(N'2024-01-08T20:55:59.987' AS DateTime), CAST(N'2024-01-08T20:55:59.987' AS DateTime), N'', N'92EA8842-B698-408F-AA4D-1176A100020C')
-GO
-INSERT [dbo].[User Info] ([User Id], [Entity], [Username], [Password Halt], [Password Salt], [First Name], [Middle Name], [Last Name], [Email Address], [Contact Info], [City], [Country], [Language], [Created By], [Created Date], [Last Modified Date], [Last Modified By], [Guid]) VALUES (2, 2, N'faaz', 0xF9BA827E2A7C75FF21A366AD557BD4908504AC93BA872977DE97F64B97E10CA8DACEF210A8CC19F022212305E9EBD89387A93E73F6F3644DDA316B681DE1AD0C, 0x6EE01CAF7563602CA9DDD547A2C1B15410C236E230434949F78D912CCF63FEF7090673F858DF6C1E25E0BFBE94AF85AB9B9964FFB7F6EF836F26F71BA4376DC619C7FB537A212D83D3D704090C85030D85F6FBE4FB5D0186BA8FBE8217DD599A77536B0F86198B9D321D6A1C2E9EBF1096274A71956CF6334C5C1641D39A7EA2, N'Faaz', N'', N'Khan', N'faaz@live.net', N'+9234330829', N'Karachi', N'Pakistan', N'English', N'Audit', CAST(N'2024-01-08T20:55:31.603' AS DateTime), CAST(N'2024-01-08T20:55:31.603' AS DateTime), N'', N'CEA54C7B-1A43-428E-80EF-C285421488BD')
-GO
-INSERT [dbo].[User Info] ([User Id], [Entity], [Username], [Password Halt], [Password Salt], [First Name], [Middle Name], [Last Name], [Email Address], [Contact Info], [City], [Country], [Language], [Created By], [Created Date], [Last Modified Date], [Last Modified By], [Guid]) VALUES (3, 2, N'lisa', 0xBB44FC52BED59E3325D82CF6D1A703F64F8188B8F01104C72A42CAF82CF37D0BBE0F6C28F1AD9D80F3AF4A3F32DE2FF01F0C1B722110CFF5A1D6FF4195D275F4, 0x2F545A1293BCFD853FEFB458BC73BBA87C7C09DAB2279032419F324FFDD9778714B3154D624F58F152D46410E2D91FB5C4AB22592680C447E9132600D1AA9BA6672903C34A15E89D840CFBF71D09DEA27E9AFE12FE001E09982CDC07E48F6105654F3D5C00E43A050E730E104BDB11C48F7ECE3CBF356F9B3ED7815C79842EAB, N'Noufil', N'', N'Khan', N'noufil@aanass.net', N'+97334330829', N'Karachi', N'Pakistan', N'English', N'Audit', CAST(N'2024-01-08T20:54:34.523' AS DateTime), CAST(N'2024-01-08T20:54:34.523' AS DateTime), N'', N'2B8E073B-7724-4F3B-957F-FA7EAB3805BA')
-GO
-INSERT [dbo].[User Info] ([User Id], [Entity], [Username], [Password Halt], [Password Salt], [First Name], [Middle Name], [Last Name], [Email Address], [Contact Info], [City], [Country], [Language], [Created By], [Created Date], [Last Modified Date], [Last Modified By], [Guid]) VALUES (8, 2, N'mark', 0x2CC72440023D7D10B9FFD57741A16E19E3C20257794CA01136D3CD223A574F8225E44995F7D003C34D613498839B31669EF4A42FFE1673BFCC068FC6DA89BE5C, 0xB7DA586313002C8DC817F303A3FF21085B671F2C3DE629925849BEC25D62D62953950DB1F0D5A391BC27C345B411678242101AB92E01E866DFDF27525A5677AEBFF8057FA845FC1383A2CECA5FFA76D3B7E45429F1E0AD150DBA8DA0057F3DDB6BC4C725336CBAE5931DB32E54D18B26174B4A4B6AA27604A00898AAA8B1DC84, N'Noufil', N'', N'Khan', N'noufil@aanass.net', N'+97334330829', N'Karachi', N'Pakistan', N'English', N'Audit', CAST(N'2024-01-08T21:54:08.560' AS DateTime), CAST(N'2024-01-08T21:54:08.560' AS DateTime), N'', N'3276E790-BDFF-4AB6-BCB1-AA49D3DFB2C8')
-GO
-SET IDENTITY_INSERT [dbo].[User Info] OFF
-GO
-SET IDENTITY_INSERT [dbo].[User Security Group] ON 
-GO
-INSERT [dbo].[User Security Group] ([User Security Id], [User Id], [Security Id], [Created By], [Created Date], [Last Modified Date], [Last Modified By], [Guid]) VALUES (1, 1, 1, N'Audit', CAST(N'2024-01-08T21:10:27.790' AS DateTime), CAST(N'2024-01-08T21:10:27.790' AS DateTime), NULL, N'51A6A361-5595-4EC6-92C5-EAAF6D343658')
-GO
-INSERT [dbo].[User Security Group] ([User Security Id], [User Id], [Security Id], [Created By], [Created Date], [Last Modified Date], [Last Modified By], [Guid]) VALUES (2, 2, 1, N'Audit', CAST(N'2024-01-08T21:10:32.203' AS DateTime), CAST(N'2024-01-08T21:10:32.203' AS DateTime), NULL, N'4B779BCD-509C-40DF-8439-F9849130D307')
-GO
-INSERT [dbo].[User Security Group] ([User Security Id], [User Id], [Security Id], [Created By], [Created Date], [Last Modified Date], [Last Modified By], [Guid]) VALUES (4, 3, 2, N'Audit', CAST(N'2024-01-08T21:10:40.623' AS DateTime), CAST(N'2024-01-08T21:10:40.623' AS DateTime), NULL, N'3AAC8C09-F735-47A1-AF3B-14862DE57296')
-GO
-SET IDENTITY_INSERT [dbo].[User Security Group] OFF
-GO
-SET IDENTITY_INSERT [dbo].[User Session] ON 
-GO
-INSERT [dbo].[User Session] ([Session Id], [User Guid], [Session], [Expiry]) VALUES (1, N'92EA8842-B698-408F-AA4D-1176A100020C', N'E8F4F9DF-26B6-4023-B7D1-249652CA29E2', CAST(N'2024-01-08T20:35:13.163' AS DateTime))
-GO
-SET IDENTITY_INSERT [dbo].[User Session] OFF
 GO
 ALTER TABLE [dbo].[Consignee] ADD  CONSTRAINT [DF_Consignee_Created By]  DEFAULT (N'Audit') FOR [Created By]
 GO
@@ -591,6 +563,165 @@ ALTER TABLE [dbo].[User Security Group]  WITH CHECK ADD  CONSTRAINT [FK_User Sec
 REFERENCES [dbo].[User Info] ([User Id])
 GO
 ALTER TABLE [dbo].[User Security Group] CHECK CONSTRAINT [FK_User Security Group_User Info]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1[40] 2[22] 3) )"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 2
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "Customers"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 186
+               Right = 267
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "Entity"
+            Begin Extent = 
+               Top = 6
+               Left = 301
+               Bottom = 183
+               Right = 495
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "User Info"
+            Begin Extent = 
+               Top = 6
+               Left = 527
+               Bottom = 188
+               Right = 748
+            End
+            DisplayFlags = 280
+            TopColumn = 1
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 23
+         Width = 284
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1800
+         Width = 1545
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+      End
+   End
+   Begin CriteriaPane = 
+      PaneHidden = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'View_Customers'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane2', @value=N' = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'View_Customers'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=2 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'View_Customers'
 GO
 USE [master]
 GO

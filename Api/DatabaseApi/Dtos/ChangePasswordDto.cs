@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DatabaseApi;
+namespace DatabaseApi.Dtos;
 
 public class ChangePasswordDto
 {
