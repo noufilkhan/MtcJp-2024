@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "62a60b1f-414b-4bf9-89be-b90ee3c72da0",
+		"name": "MtcJp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "19245066"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Get By Guid",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "https://localhost:5001/api/Customer"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All by Entity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://localhost:5001/api/Customer/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "https://localhost:5001/api/Customer"
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "https://localhost:5001/api/Customer"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\": \"noufil\",\r\n    \"Password\": \"P@$$w0rd\",\r\n    \"Entity\": \"1\",\r\n    \"FirstName\": \"Noufil\",\r\n    \"MiddleName\": \"\",\r\n    \"LastName\": \"Khan\",\r\n    \"EmailAddress\": \"noufil@aanass.net\",\r\n    \"ContactInfo\": \"+97334330829\",\r\n    \"City\": \"Karachi\",\r\n    \"Country\": \"Pakistan\",\r\n    \"Language\": \"English\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:5001/api/account/register"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\": \"noufil\",\r\n    \"Password\": \"P@$$w0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://localhost:5001/api/account/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:5001/api/User/noufil"
+			},
+			"response": []
+		}
+	]
+}
