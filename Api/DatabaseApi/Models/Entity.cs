@@ -21,8 +21,6 @@ public partial class Entity
 
     public string Guid { get; set; }
 
-    public virtual ICollection<Consignee> Consignees { get; set; } = new List<Consignee>();
-
     public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
 
     public virtual ICollection<Stock> Stocks { get; set; } = new List<Stock>();

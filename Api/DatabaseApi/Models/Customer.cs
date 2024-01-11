@@ -47,6 +47,8 @@ public partial class Customer
 
     public string Guid { get; set; }
 
+    public virtual ICollection<Consignee> Consignees { get; set; } = new List<Consignee>();
+
     public virtual Entity EntityNavigation { get; set; }
 
     public virtual UserInfo User { get; set; }

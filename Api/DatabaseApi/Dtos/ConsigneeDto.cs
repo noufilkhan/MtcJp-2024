@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
+using DatabaseApi.Models;
 
-namespace DatabaseApi.Models;
+namespace DatabaseApi;
 
-public partial class Consignee
+public class ConsigneeDto
 {
     public int ConsigneeId { get; set; }
 
@@ -15,10 +15,12 @@ public partial class Consignee
 
     public string ConsigneeName { get; set; }
 
+    [Required(ErrorMessage = "Country is Required")]
     public string Country { get; set; }
 
     public string Source { get; set; }
 
+    [Required(ErrorMessage = "Category is Required")]
     public string Category { get; set; }
 
     public string Address { get; set; }
@@ -31,21 +33,10 @@ public partial class Consignee
 
     public string TaxId { get; set; }
 
-    public string CompanyRegistrationUrl { get; set; }
-
     public string ImportLicenseUrl { get; set; }
-
-    public string CreatedBy { get; set; }
-
-    public DateTime CreatedDate { get; set; }
-
-    public DateTime LastModifiedDate { get; set; }
-
-    public string LastModifiedBy { get; set; }
 
     public string Guid { get; set; }
 
-    public virtual Customer Customer { get; set; }
+    public Customer CustomerDetails { get; set; }
 
-    public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
 }
