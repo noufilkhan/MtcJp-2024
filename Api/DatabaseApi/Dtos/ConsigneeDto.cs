@@ -37,6 +37,8 @@ public class ConsigneeDto
 
     public string Guid { get; set; }
 
-    public Customer CustomerDetails { get; set; }
+    public string UserName { get; set; }
+
+    public Consignee_CustomerDto CustomerDetails { get; set; }
 
 }

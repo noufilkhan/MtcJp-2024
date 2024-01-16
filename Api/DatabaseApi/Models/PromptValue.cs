@@ -7,6 +7,8 @@ public partial class PromptValue
 {
     public int PromptId { get; set; }
 
+    public int Entity { get; set; }
+
     public string PromptName { get; set; }
 
     public string PromptSubCategory { get; set; }

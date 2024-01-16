@@ -1,113 +1,188 @@
 ﻿using DatabaseApi.Controllers;
 using DatabaseApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseApi;
 
-public class ConsigneeController:BaseApiController
+[Authorize]
+public class ConsigneeController : BaseApiController
 {
     private VehiclesContext _context;
 
     public ConsigneeController(VehiclesContext context) { _context = context; }
 
-
-    // https://localhost:5001/api/Consignee/1
-    [HttpGet("{entity}")]    
-    public async Task<ActionResult<IEnumerable<CustomerDto>>> GetAll(int entity)
+    // https://localhost:5001/api/Consignee/ByEntity/1
+    [HttpGet("ByEntity/{entity}")]
+    public async Task<ActionResult<IEnumerable<ConsigneeDto>>> GetAllByEntity(int entity)
     {
         if (entity < 1) return BadRequest();
 
-        // var allConsignee = await (
-        //     from cg in _context.Consignees
-        //     join ct in _context.Customers on cg.CustomerId equals ct.CustomerId
-        //     where ct.Entity == entity
-        //     select cg.
-        //     );
+        var _list = await _context.Consignees
+            .Include(p => p.Customer)
+            .Where(p=> p.Customer.Entity == entity)
+            .Select(
+                p => new ConsigneeDto
+                {
+                    ConsigneeId = p.ConsigneeId,
+                    CustomerId = p.CustomerId,
+                    ConsigneeName = p.ConsigneeName,
+                    CompanyName = p.CompanyName,
+                    CompanyOwner = p.CompanyOwner,
+                    Country = p.Country,
+                    Source = p.Source,
+                    Category = p.Category,
+                    Address = p.Address,
+                    Phone = p.Phone,
+                    BuyingLimitCurrency = p.BuyingLimitCurrency,
+                    BuyingLimit = p.BuyingLimit,
+                    TaxId = p.TaxId,
+                    ImportLicenseUrl = p.ImportLicenseUrl,
+                    Guid = p.Guid,
 
-        var listcustomer = await _context.Consignees.ToListAsync();
+                    CustomerDetails = new Consignee_CustomerDto
+                    {
+                        CustomerName = p.Customer.CustomerName,
+                        CompanyName = p.Customer.CompanyName,
+                        CompanyOwner = p.Customer.CompanyOwner,
+                        Guid = p.Customer.Guid
+                    }
+                }
+            )
+            .ToListAsync();
 
-        List<CustomerDto> customerDtos = new List<CustomerDto>();
-
-        // foreach (ViewCustomer cust in listcustomer)
-        // {
-        //     customerDtos.Add(new CustomerDto()
-        //     {
-        //         Entity = cust.Entity,
-        //         UserId = cust.UserId,                
-        //         CompanyName = cust.CustomerName,
-        //         CompanyOwner = cust.CompanyOwner,
-        //         CustomerName = cust.CustomerName,
-        //         Country = cust.Country,
-        //         Source = cust.Source,
-        //         Category = cust.Category,
-        //         Address = cust.Address,
-        //         Phone = cust.Phone,
-        //         BuyingLimitCurrency = cust.BuyingLimitCurrency,
-        //         BuyingLimit = cust.BuyingLimit,
-        //         TaxId = cust.TaxId,
-        //         ImportLicenseUrl = cust.ImportLicenseUrl,
-        //         Guid = cust.Guid,
-        //         CustomerId = cust.CustomerId
-        //     });
-        // }
-
-        return customerDtos;
-
+        return _list;
     }
+
+// https://localhost:5001/api/Consignee/ByCustomerGuid/B2962CEA-FFDD-4707-B6C9-AC166AE99281
+    [HttpGet("ByCustomerGuid/{customerguid}")]
+    public async Task<ActionResult<IEnumerable<ConsigneeDto>>> GetAllByCustomerGuid(string customerguid)
+    {
+        if (string.IsNullOrEmpty(customerguid)) return BadRequest();
+
+        var _list = await _context.Consignees
+            .Include(p => p.Customer)
+            .Where(p=> p.Customer.Guid == customerguid)
+            .Select(
+                p => new ConsigneeDto
+                {
+                    ConsigneeId = p.ConsigneeId,
+                    CustomerId = p.CustomerId,
+                    ConsigneeName = p.ConsigneeName,
+                    CompanyName = p.CompanyName,
+                    CompanyOwner = p.CompanyOwner,
+                    Country = p.Country,
+                    Source = p.Source,
+                    Category = p.Category,
+                    Address = p.Address,
+                    Phone = p.Phone,
+                    BuyingLimitCurrency = p.BuyingLimitCurrency,
+                    BuyingLimit = p.BuyingLimit,
+                    TaxId = p.TaxId,
+                    ImportLicenseUrl = p.ImportLicenseUrl,
+                    Guid = p.Guid,
+
+                    CustomerDetails = new Consignee_CustomerDto
+                    {
+                        CustomerName = p.Customer.CustomerName,
+                        CompanyName = p.Customer.CompanyName,
+                        CompanyOwner = p.Customer.CompanyOwner,
+                        Guid = p.Customer.Guid
+                    }
+                }
+            )
+            .ToListAsync();
+
+        return _list;
+    }
+
 
     // https://localhost:5001/api/Customer/1/B2962CEA-FFDD-4707-B6C9-AC166AE99281
     [HttpGet("{entity}/{guid}")]
-    public async Task<ActionResult<ViewCustomer>> GetByGuid(int entity, string guid)
+    public async Task<ActionResult<ConsigneeDto>> GetByGuid(int entity, string guid)
     {
-        return await _context.ViewCustomers.FirstOrDefaultAsync(
-            x => x.Guid == guid && x.Entity == entity);
+        if (entity < 1) return BadRequest();
+        if (string.IsNullOrEmpty(guid)) return BadRequest();
+
+        var _list = await _context.Consignees
+            .Include(p => p.Customer)
+            .Where( p=> p.Guid == guid)
+            .Select(
+                p => new ConsigneeDto
+                {
+                    ConsigneeId = p.ConsigneeId,
+                    CustomerId = p.CustomerId,
+                    ConsigneeName = p.ConsigneeName,
+                    CompanyName = p.CompanyName,
+                    CompanyOwner = p.CompanyOwner,
+                    Country = p.Country,
+                    Source = p.Source,
+                    Category = p.Category,
+                    Address = p.Address,
+                    Phone = p.Phone,
+                    BuyingLimitCurrency = p.BuyingLimitCurrency,
+                    BuyingLimit = p.BuyingLimit,
+                    TaxId = p.TaxId,
+                    ImportLicenseUrl = p.ImportLicenseUrl,
+                    Guid = p.Guid,
+                    
+                    CustomerDetails = new Consignee_CustomerDto
+                    {                        
+                        CustomerName = p.Customer.CustomerName,
+                        CompanyName = p.Customer.CompanyName,
+                        CompanyOwner = p.Customer.CompanyOwner,
+                        Guid = p.Customer.Guid
+                    }
+                }
+            )
+            .FirstAsync();
+
+        return _list;
     }
 
 
-    // https://localhost:5001/api/Customer/1
+    // https://localhost:5001/api/Consignee/1
     /*
-        {
-            "entity": 1,
-            "userId": 1,
-            "companyName": "Fourth Company",
-            "companyOwner": "James Bond",
-            "customerName": "The Rock",
-            "country": "United States",
-            "source": null,
-            "category": "First Category",
-            "address": "ABC Street",
-            "phone": "+12547856",
-            "buyingLimitCurrency": "$",
-            "buyingLimit": 3000.000,
-            "taxId": "12548",
-            "importLicenseUrl": "www.google.com"
+        {            
+            "customerId": 3,
+            "companyName": "Second Cosignee Company",
+            "companyOwner": "Second Cosignee Owner",
+            "consigneeName": "Second Cosignee Name",
+            "country": "Second Cosignee  Country",
+            "source": "Second Cosignee  Source",
+            "category": "Second Cosignee Category",
+            "address": "Second Cosignee Address",
+            "phone": "Second Cosignee Phone",
+            "buyingLimitCurrency": "Yen",
+            "buyingLimit": 1000.000,
+            "taxId": null,
+            "importLicenseUrl": null,
+            "guid": null
         }
     */
     [HttpPost("{entity}")]
-    public async Task<IActionResult> Add(CustomerDto customerDto)
+    public async Task<IActionResult> Add(ConsigneeDto consigneeDto)
     {
-        Customer customer = new()
+        Consignee consignee = new()
         {
-            Entity = customerDto.Entity,
-            UserId = customerDto.UserId,
-            CompanyName = customerDto.CompanyName,
-            CompanyOwner = customerDto.CompanyOwner,
-            CustomerName = customerDto.CustomerName,
-            Country = customerDto.Country,
-            Source = customerDto.Source,
-            Category = customerDto.Category,
-            Address = customerDto.Address,
-            Phone = customerDto.Phone,
-            BuyingLimitCurrency = customerDto.BuyingLimitCurrency,
-            BuyingLimit = customerDto.BuyingLimit,
-            TaxId = customerDto.TaxId,
-            ImportLicenseUrl = customerDto.ImportLicenseUrl,
+            CustomerId = consigneeDto.CustomerId,
+            CompanyName = consigneeDto.CompanyName,
+            CompanyOwner = consigneeDto.CompanyOwner,
+            ConsigneeName = consigneeDto.ConsigneeName,
+            Country = consigneeDto.Country,
+            Source = consigneeDto.Source,
+            Category = consigneeDto.Category,
+            Address = consigneeDto.Address,
+            Phone = consigneeDto.Phone,
+            BuyingLimitCurrency = consigneeDto.BuyingLimitCurrency,
+            BuyingLimit = consigneeDto.BuyingLimit,
+            TaxId = consigneeDto.TaxId,
+            ImportLicenseUrl = consigneeDto.ImportLicenseUrl,
             Guid = Guid.NewGuid().ToString()
         };
 
-        _context.Customers.Add(customer);
+        _context.Consignees.Add(consignee);
         await _context.SaveChangesAsync();
         return Ok();
     }
@@ -116,50 +191,58 @@ public class ConsigneeController:BaseApiController
     // https://localhost:5001/api/Customer/1/6c11315d-af5a-4fac-8348-65e45826be3d
     /*
         {
-            "customerId": 5,
-            "entity": 1,
-            "userid": 1,
-            "username": "noufil",
-            "companyName": "Fourth Company 2",
-            "companyOwner": "James Bond",
-            "customerName": "The Rock",
-            "country": "United States",
-            "source": null,
-            "category": "First Category",
-            "address": "ABC Street",
-            "phone": "+12547856",
-            "buyingLimitCurrency": "$",
-            "buyingLimit": 3000.000,
-            "taxId": "12548",
-            "importLicenseUrl": "www.google.com"
-        }
+    "consigneeId": 3,
+    "customerId": 0,
+    "companyName": "Second Cosignee Company",
+    "companyOwner": "Second Cosignee Owner",
+    "consigneeName": "Second Cosignee Name",
+    "country": "Second Cosignee  Country",
+    "source": "Second Cosignee  Source",
+    "category": "Second Cosignee Category",
+    "address": "Second Cosignee Address",
+    "phone": "Second Cosignee Phone",
+    "buyingLimitCurrency": "Yen",
+    "buyingLimit": 1000.000,
+    "taxId": null,
+    "importLicenseUrl": null,
+    "guid": "bebe02db-e5d5-4b08-9cdb-12835dd57772",
+    "userName": null,
+    "customerDetails": {
+        "customerId": 3,
+        "companyName": "Second Company",
+        "companyOwner": "Donald Duck",
+        "customerName": "Tom And Jerry",
+        "guid": "B2962CEA-FFDD-4707-B6C9-AC166AE99281"
+    }
+}
     */
     [HttpPut("{entity}/{guid}")]
-    public async Task<IActionResult> Update(int entity, string guid, CustomerDto customerDto)
+    public async Task<IActionResult> Update(int entity, string guid, ConsigneeDto consigneeDto)
     {
-        Customer customer = await _context.Customers.FirstAsync(x => x.Guid == guid);
+        Consignee consignee = await _context.Consignees
+                .FirstAsync(x => x.Guid == guid);
 
-        if (customer == null)
-            return BadRequest("Customer details not found");
+        if (consignee == null)
+            return BadRequest("Consignee details not found");
 
-        customer.CustomerId = customerDto.CustomerId;
-        customer.Entity = customerDto.Entity;
-        customer.UserId = customerDto.UserId;
-        customer.CompanyName = customerDto.CompanyName;
-        customer.CompanyOwner = customerDto.CompanyOwner;
-        customer.CustomerName = customerDto.CustomerName;
-        customer.Country = customerDto.Country;
-        customer.Source = customerDto.Source;
-        customer.Category = customerDto.Category;
-        customer.Address = customerDto.Address;
-        customer.Phone = customerDto.Phone;
-        customer.BuyingLimitCurrency = customerDto.BuyingLimitCurrency;
-        customer.BuyingLimit = customerDto.BuyingLimit;
-        customer.TaxId = customerDto.TaxId;
-        customer.ImportLicenseUrl = customerDto.ImportLicenseUrl;
-        customer.Guid = guid;
-        customer.LastModifiedDate = DateTime.UtcNow;
-        customer.LastModifiedBy = customerDto.UserName;
+        consignee.ConsigneeId = consigneeDto.ConsigneeId;
+        consignee.CustomerId = consigneeDto.CustomerId;
+        consignee.CompanyName = consigneeDto.CompanyName;
+        consignee.CompanyOwner = consigneeDto.CompanyOwner;
+        consignee.ConsigneeName = consigneeDto.ConsigneeName;
+        consignee.Country = consigneeDto.Country;
+        consignee.Source = consigneeDto.Source;
+        consignee.Category = consigneeDto.Category;
+        consignee.Address = consigneeDto.Address;
+        consignee.Phone = consigneeDto.Phone;
+        consignee.BuyingLimitCurrency = consigneeDto.BuyingLimitCurrency;
+        consignee.BuyingLimit = consigneeDto.BuyingLimit;
+        consignee.TaxId = consigneeDto.TaxId;
+        consignee.ImportLicenseUrl = consigneeDto.ImportLicenseUrl;
+        consignee.Guid = guid;
+        consignee.LastModifiedDate = DateTime.UtcNow;
+        consignee.LastModifiedBy = consigneeDto.UserName;
+
         await _context.SaveChangesAsync();
         return Ok();
     }

@@ -14,23 +14,18 @@ public class CustomerController : BaseApiController
     public CustomerController(VehiclesContext context) { _context = context; }
 
 
-    // https://localhost:5001/api/Customer/1
-    [HttpGet("{entity}")]    
-    public async Task<ActionResult<IEnumerable<CustomerDto>>> GetAll(int entity)
+    // https://localhost:5001/api/Customer/ByEntity/1
+    [HttpGet("ByEntity/{entity}")]
+    public async Task<ActionResult<IEnumerable<CustomerDto>>> GetAllByEntity(int entity)
     {
         if (entity < 1) return BadRequest();
 
-        List<ViewCustomer> listcustomer = await _context.ViewCustomers
-                .Where(x => x.Entity == entity).ToListAsync();
-
-        List<CustomerDto> customerDtos = new List<CustomerDto>();
-
-        foreach (ViewCustomer cust in listcustomer)
-        {
-            customerDtos.Add(new CustomerDto()
+        return await _context.Customers
+            .Where(x => x.Entity == entity)
+            .Select(cust => new CustomerDto
             {
                 Entity = cust.Entity,
-                UserId = cust.UserId,                
+                UserId = cust.UserId,
                 CompanyName = cust.CustomerName,
                 CompanyOwner = cust.CompanyOwner,
                 CustomerName = cust.CustomerName,
@@ -45,11 +40,8 @@ public class CustomerController : BaseApiController
                 ImportLicenseUrl = cust.ImportLicenseUrl,
                 Guid = cust.Guid,
                 CustomerId = cust.CustomerId
-            });
-        }
-
-        return customerDtos;
-
+            })
+            .ToListAsync();
     }
 
     // https://localhost:5001/api/Customer/1/B2962CEA-FFDD-4707-B6C9-AC166AE99281

@@ -31,6 +31,8 @@ public partial class VehiclesContext : DbContext
 
     public virtual DbSet<StockAddtionalCost> StockAddtionalCosts { get; set; }
 
+    public virtual DbSet<StockCost> StockCosts { get; set; }
+
     public virtual DbSet<StockDocument> StockDocuments { get; set; }
 
     public virtual DbSet<StockImage> StockImages { get; set; }
@@ -45,7 +47,7 @@ public partial class VehiclesContext : DbContext
 
 //     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//         => optionsBuilder.UseSqlServer("Data Source=NOUFIL-PC\\SQLEXPRESS;Initial Catalog=Vehicles;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;");
+//         => optionsBuilder.UseSqlServer("Data Source=DESKTOP-0UJ8JH8\\SQLEXPRESS;Initial Catalog=Vehicles;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -230,9 +232,7 @@ public partial class VehiclesContext : DbContext
 
             entity.ToTable("Prompt Values");
 
-            entity.Property(e => e.PromptId)
-                .ValueGeneratedNever()
-                .HasColumnName("Prompt Id");
+            entity.Property(e => e.PromptId).HasColumnName("Prompt Id");
             entity.Property(e => e.CreatedBy)
                 .IsRequired()
                 .HasMaxLength(100)
@@ -372,6 +372,22 @@ public partial class VehiclesContext : DbContext
             entity.ToTable("Stock");
 
             entity.Property(e => e.StockId).HasColumnName("Stock Id");
+            entity.Property(e => e.ApjComments)
+                .HasMaxLength(300)
+                .HasColumnName("APJ Comments");
+            entity.Property(e => e.Area).HasColumnType("numeric(18, 5)");
+            entity.Property(e => e.AuctionShipNo)
+                .HasMaxLength(300)
+                .HasColumnName("Auction Ship No");
+            entity.Property(e => e.Body).HasMaxLength(300);
+            entity.Property(e => e.Cc)
+                .HasMaxLength(300)
+                .HasColumnName("CC");
+            entity.Property(e => e.ChasisModel)
+                .HasMaxLength(300)
+                .HasColumnName("Chasis Model");
+            entity.Property(e => e.Color).HasMaxLength(300);
+            entity.Property(e => e.Comments).HasMaxLength(300);
             entity.Property(e => e.CreatedBy)
                 .IsRequired()
                 .HasMaxLength(100)
@@ -381,10 +397,29 @@ public partial class VehiclesContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("Created Date");
+            entity.Property(e => e.EngineNumber)
+                .HasMaxLength(300)
+                .HasColumnName("Engine Number");
+            entity.Property(e => e.EngineType)
+                .HasMaxLength(300)
+                .HasColumnName("Engine Type");
+            entity.Property(e => e.FuelType)
+                .HasMaxLength(300)
+                .HasColumnName("Fuel Type");
+            entity.Property(e => e.GrossWeight)
+                .HasColumnType("numeric(18, 0)")
+                .HasColumnName("Gross Weight");
             entity.Property(e => e.Guid)
                 .IsRequired()
                 .HasMaxLength(100)
                 .HasDefaultValueSql("(newid())");
+            entity.Property(e => e.Height).HasColumnType("numeric(18, 5)");
+            entity.Property(e => e.IchiMasho)
+                .HasMaxLength(300)
+                .HasColumnName("Ichi Masho");
+            entity.Property(e => e.InteriorColor)
+                .HasMaxLength(300)
+                .HasColumnName("Interior Color");
             entity.Property(e => e.LastModifiedBy)
                 .HasMaxLength(100)
                 .HasColumnName("Last Modified By");
@@ -392,12 +427,42 @@ public partial class VehiclesContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("Last Modified Date");
-            entity.Property(e => e.Make)
-                .IsRequired()
-                .HasMaxLength(300);
-            entity.Property(e => e.Model)
-                .IsRequired()
-                .HasMaxLength(300);
+            entity.Property(e => e.Length).HasColumnType("numeric(18, 5)");
+            entity.Property(e => e.Make).HasMaxLength(300);
+            entity.Property(e => e.ManufactureDate)
+                .HasColumnType("datetime")
+                .HasColumnName("Manufacture Date");
+            entity.Property(e => e.Mileage).HasMaxLength(300);
+            entity.Property(e => e.Model).HasMaxLength(300);
+            entity.Property(e => e.ModelCode)
+                .HasMaxLength(300)
+                .HasColumnName("Model Code");
+            entity.Property(e => e.N1).HasMaxLength(300);
+            entity.Property(e => e.N2).HasMaxLength(300);
+            entity.Property(e => e.N3).HasMaxLength(300);
+            entity.Property(e => e.N4).HasMaxLength(300);
+            entity.Property(e => e.NetWeight)
+                .HasColumnType("numeric(18, 0)")
+                .HasColumnName("Net Weight");
+            entity.Property(e => e.OtherInformation)
+                .HasMaxLength(300)
+                .HasColumnName("Other Information");
+            entity.Property(e => e.PurchaseDate)
+                .HasColumnType("datetime")
+                .HasColumnName("Purchase Date");
+            entity.Property(e => e.Repaired).HasMaxLength(300);
+            entity.Property(e => e.SerialNo)
+                .HasMaxLength(300)
+                .HasColumnName("Serial No");
+            entity.Property(e => e.Status).HasMaxLength(300);
+            entity.Property(e => e.Traction).HasMaxLength(300);
+            entity.Property(e => e.Transmission).HasMaxLength(300);
+            entity.Property(e => e.VehicleGrade)
+                .HasMaxLength(300)
+                .HasColumnName("Vehicle Grade");
+            entity.Property(e => e.Weight).HasColumnType("numeric(18, 0)");
+            entity.Property(e => e.Width).HasColumnType("numeric(18, 5)");
+            entity.Property(e => e.Year).HasColumnType("date");
 
             entity.HasOne(d => d.EntityNavigation).WithMany(p => p.Stocks)
                 .HasForeignKey(d => d.Entity)
@@ -447,6 +512,128 @@ public partial class VehiclesContext : DbContext
                 .HasForeignKey(d => d.StockId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Stock Addtional Cost_Stock");
+        });
+
+        modelBuilder.Entity<StockCost>(entity =>
+        {
+            entity.ToTable("Stock Cost");
+
+            entity.Property(e => e.StockCostId).HasColumnName("Stock Cost Id");
+            entity.Property(e => e.AgentStock)
+                .HasMaxLength(50)
+                .HasColumnName("Agent Stock");
+            entity.Property(e => e.AuctionFee)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Auction Fee");
+            entity.Property(e => e.AuctionFeeSelling)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Auction Fee Selling");
+            entity.Property(e => e.AuctionVisitFee)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Auction Visit Fee");
+            entity.Property(e => e.AutoquestFee)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Autoquest Fee");
+            entity.Property(e => e.BuyingCost)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Buying Cost");
+            entity.Property(e => e.Commission).HasColumnType("numeric(18, 5)");
+            entity.Property(e => e.CreatedBy)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasDefaultValueSql("(N'Audit')")
+                .HasColumnName("Created By");
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("Created Date");
+            entity.Property(e => e.CustomPrice)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Custom Price");
+            entity.Property(e => e.CuttingFee)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Cutting Fee");
+            entity.Property(e => e.ExchangeRate)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Exchange Rate");
+            entity.Property(e => e.ForwardingPrice)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Forwarding Price");
+            entity.Property(e => e.Freight).HasColumnType("numeric(18, 5)");
+            entity.Property(e => e.Guid)
+                .IsRequired()
+                .HasMaxLength(100)
+                .HasDefaultValueSql("(newid())");
+            entity.Property(e => e.InspectionFee)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Inspection Fee");
+            entity.Property(e => e.InsuranceFee)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Insurance Fee");
+            entity.Property(e => e.InvoicePriceUsd)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Invoice Price USD");
+            entity.Property(e => e.Jizel).HasColumnType("numeric(18, 5)");
+            entity.Property(e => e.LastModifiedBy)
+                .HasMaxLength(100)
+                .HasColumnName("Last Modified By");
+            entity.Property(e => e.LastModifiedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("Last Modified Date");
+            entity.Property(e => e.LinkedPart)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Linked Part");
+            entity.Property(e => e.Misc).HasColumnType("numeric(18, 5)");
+            entity.Property(e => e.Penalty).HasColumnType("numeric(18, 5)");
+            entity.Property(e => e.PhotoFee)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Photo Fee");
+            entity.Property(e => e.Profit).HasColumnType("numeric(18, 5)");
+            entity.Property(e => e.ProfitPercentage)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Profit Percentage");
+            entity.Property(e => e.RadioactiveInspection)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Radioactive Inspection");
+            entity.Property(e => e.RecycleCost)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Recycle Cost");
+            entity.Property(e => e.RecycleFee)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Recycle Fee");
+            entity.Property(e => e.RecycleFeeRefunded)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Recycle Fee Refunded");
+            entity.Property(e => e.Repairs).HasColumnType("numeric(18, 5)");
+            entity.Property(e => e.Rikso).HasColumnType("numeric(18, 5)");
+            entity.Property(e => e.SalePrice)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Sale Price");
+            entity.Property(e => e.SendaFee)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Senda Fee");
+            entity.Property(e => e.SmokeFee)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Smoke Fee");
+            entity.Property(e => e.StockId).HasColumnName("Stock Id");
+            entity.Property(e => e.StorageFee)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Storage Fee");
+            entity.Property(e => e.SurrenderFee)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Surrender Fee");
+            entity.Property(e => e.Thc)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("THC");
+            entity.Property(e => e.TotalCost)
+                .HasColumnType("numeric(18, 5)")
+                .HasColumnName("Total Cost");
+
+            entity.HasOne(d => d.Stock).WithMany(p => p.StockCosts)
+                .HasForeignKey(d => d.StockId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Stock Cost_Stock");
         });
 
         modelBuilder.Entity<StockDocument>(entity =>
