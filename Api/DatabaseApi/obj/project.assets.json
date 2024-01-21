@@ -3364,7 +3364,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Noufil\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -3372,11 +3372,11 @@
       "projectUniqueName": "E:\\Development\\angular\\MtcJp-2024\\Api\\DatabaseApi\\DatabaseApi.csproj",
       "projectName": "DatabaseApi",
       "projectPath": "E:\\Development\\angular\\MtcJp-2024\\Api\\DatabaseApi\\DatabaseApi.csproj",
-      "packagesPath": "C:\\Users\\Noufil\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
       "outputPath": "E:\\Development\\angular\\MtcJp-2024\\Api\\DatabaseApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Noufil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
