@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "gJh+lEyKVnDGBi/2JGAniebEeCMbeDzc+Q9DOmxbJAMAD4m9KkKENVI8Aclm94q/7BzpfoiHALhWnFieU8hIag==",
-=======
-  "dgSpecHash": "5DDfdegQPZNZtLYY0wxH0CWUQ1koXBmGMzwnldQyBz2905PoGqXcszUCQoLgDB2d1jqfy1bZnBmYeqvEKQ89tg==",
->>>>>>> 9bc8bcffecd2b843ee676f6c9b4e908d528cc371
   "success": true,
   "projectFilePath": "D:\\Development\\Projects\\MtcJp-2024\\Api\\DatabaseApi\\DatabaseApi.csproj",
   "expectedPackageFiles": [
@@ -79,5 +75,12 @@
     "C:\\Users\\Noufil\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\Noufil\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\Development\\Projects\\MtcJp-2024\\Api\\DatabaseApi\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
