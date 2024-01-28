@@ -6,7 +6,6 @@ using DatabaseApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 namespace DatabaseApi.Controllers;
 
@@ -33,6 +32,22 @@ public class AccountController : BaseApiController
             "Password": "P@$$w0rd"
         }
     */
+
+    private UserDto getUserDto(string _username, int _userid, string _userguid,
+        int _entity, string _token, string _result, string _resultmessage)
+    {
+        return new UserDto
+        {
+            Username = _username,
+            UserId = _userid,
+            UserGuid = _userguid,
+            Entity = _entity,
+            Token = _token,
+            Result = _result,
+            ResultMessage = _resultmessage
+        };
+    }
+
     [HttpPost("login")]
     [AllowAnonymous]
     public async Task<ActionResult<UserDto>> Login(LoginDto logindto)
@@ -41,24 +56,24 @@ public class AccountController : BaseApiController
             x => x.Username == logindto.Username
         );
 
-        if (user == null) return Unauthorized("Invalid Username");
+        if (user == null)
+        {
+            return getUserDto(string.Empty, 0, string.Empty, 0,
+            string.Empty, "Error", "Username is incorrect");
+        }
 
         List<byte[]> byteList = computeHash(user.PasswordSalt, logindto.Password);
         var computedhash = byteList[0];
 
         for (int i = 0; i < computedhash.Length; i++)
         {
-            if (computedhash[i] != user.PasswordHalt[i]) return Unauthorized("Invalid Password");
+            if (computedhash[i] != user.PasswordHalt[i])
+                return getUserDto(string.Empty, 0, string.Empty, 0,
+            string.Empty, "Error", "Username or Password is incorrect");
         }
 
-        return new UserDto
-        {
-            Username = user.Username,
-            UserId = user.UserId,
-            UserGuid = user.Guid,
-            Entity = user.Entity,
-            Token = _tokenService.CreateToken(user)
-        };
+        return getUserDto(user.Username, user.UserId, user.Guid, user.Entity,
+                    _tokenService.CreateToken(user), "Success", string.Empty);
     }
 
 

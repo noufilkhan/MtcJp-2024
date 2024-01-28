@@ -11,5 +11,8 @@ public class UserDto
     public int Entity { get; set; }    
 
     public string Token { get; set; }
-    
+
+    public string Result {get;set;}
+
+    public string ResultMessage {get;set;}
 }
